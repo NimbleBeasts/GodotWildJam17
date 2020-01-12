@@ -25,6 +25,7 @@ config/icon="res://icon.png"
 Global="*res://src/autoloads/Global.gd"
 Types="*res://src/autoloads/Types.gd"
 Debug="*res://src/autoloads/Debug.gd"
+Multi="*res://src/autoloads/MultiplayerAPI.tscn"
 
 [display]
 
