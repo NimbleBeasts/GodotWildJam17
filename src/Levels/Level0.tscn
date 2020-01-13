@@ -31,3 +31,11 @@ vframes = 4
 hframes = 4
 frame = 4
 
+[node name="Button" type="Button" parent="."]
+margin_left = 34.349
+margin_top = 14.4044
+margin_right = 111.349
+margin_bottom = 34.4044
+text = "End Game"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
