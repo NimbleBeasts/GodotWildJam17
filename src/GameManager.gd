@@ -33,9 +33,11 @@ func stateTransition(to):
 	if to == Types.GameStates.Menu:
 		$gameViewport.hide()
 		$menuViewport.show()
+		$menuViewport/Viewport/Menu.show()
 	elif to == Types.GameStates.Game:
 		$gameViewport.show()
 		$menuViewport.hide()
+		$menuViewport/Viewport/Menu.hide()
 		updateLights()
 	state = to
 

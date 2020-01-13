@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Nodes/TilesGrid.gd" type="Script" id=1]
+
+[node name="TilesGrid" type="GridContainer"]
+custom_constants/vseparation = -2
+custom_constants/hseparation = -2
+columns = 8
+script = ExtResource( 1 )
+
