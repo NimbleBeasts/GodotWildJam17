@@ -10,6 +10,7 @@ func _on_Tile_pressed():
 		card.hframes = Types.TileHframes
 		card.frame = Global.gm.levelNode.TopCard
 		card.centered = false
+		Global.gm.levelNode.TilesGrid.tilesContent[coords]=Global.gm.levelNode.TopCard
 		add_child(card)
 		
 		Global.gm.levelNode.ShowNextCard()

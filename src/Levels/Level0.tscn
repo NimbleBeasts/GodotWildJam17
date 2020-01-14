@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Levels/Level0.gd" type="Script" id=1]
 [ext_resource path="res://src/Nodes/TilesGrid.tscn" type="PackedScene" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://assets/art/tileset.png" type="Texture" id=4]
+[ext_resource path="res://src/Nodes/Deck.tscn" type="PackedScene" id=3]
 
 [node name="Level0" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,22 +13,7 @@ margin_top = 81.9945
 margin_right = 202.77
 margin_bottom = 81.9945
 
-[node name="Deck" type="TextureButton" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 551.801
-margin_top = 140.72
-margin_right = 551.801
-margin_bottom = 140.72
-texture_normal = ExtResource( 3 )
-expand = true
-
-[node name="TopCard" type="Sprite" parent="Deck"]
-scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
-centered = false
-vframes = 4
-hframes = 4
-frame = 4
+[node name="Deck" parent="." instance=ExtResource( 3 )]
 
 [node name="Button" type="Button" parent="."]
 margin_left = 34.349
