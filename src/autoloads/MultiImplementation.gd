@@ -20,6 +20,8 @@ func _ready() -> void :
 	#warning-ignore:return_value_discarded
 	get_tree().connect("server_disconnected", self, "server_disconnected")
 
+	connection.set_transfer_mode( 2 ) 
+
 
 func connect_to_server( ip4_address : String ) -> bool :
 	#Connect to another player.
