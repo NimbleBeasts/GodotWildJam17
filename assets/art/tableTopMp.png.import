@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mock.png-49799279a7ae9a0ceb11d079c144a692.stex"
+path="res://.import/tableTopMp.png-34e55f11c278e7d38c8dcd02ae3f3584.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/mock.png"
-dest_files=[ "res://.import/mock.png-49799279a7ae9a0ceb11d079c144a692.stex" ]
+source_file="res://assets/art/tableTopMp.png"
+dest_files=[ "res://.import/tableTopMp.png-34e55f11c278e7d38c8dcd02ae3f3584.stex" ]
 
 [params]
 

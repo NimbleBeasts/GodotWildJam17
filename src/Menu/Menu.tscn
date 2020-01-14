@@ -248,6 +248,9 @@ margin_top = 288.0
 margin_right = 512.0
 margin_bottom = 312.0
 text = "Random"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Multiplayer" type="Control" parent="."]
 visible = false
