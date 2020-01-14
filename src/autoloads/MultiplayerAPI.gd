@@ -16,9 +16,10 @@ func call_remote_method( method_name : String, object_to_call : Object = self,
 func connect_to_player( ip4_address : String ) -> bool :
 	#Connect to the player specified by ip4_address.
 	#Returns true if connection was succesful. False otherwise.
-	return imp.connect_to_player( ip4_address )
+	return imp.connect_to_server( ip4_address )
 
 
 func start_hosting() -> void :
 	#Begin accepting connections from other players.
+	#The other player will need to provide my ip address.
 	imp.set_as_server()
