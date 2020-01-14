@@ -57,7 +57,7 @@ func AreConnected(tile1,tile2, direction):#direction: tile2's position relative 
 			return ([x2,y2] in [SortDir(y1,Opposite(y1)),SortDir(Neighbor(x1),Opposite(y1)),SortDir(Opposite(Neighbor(x1)),Opposite(y1))])
 	else:return false
 func IsAPath(type):#whether the tile type can connect two cities
-	return type in [Rail_UD,Rail_LR,Rail_LD,Rail_RD,Rail_UL,Rail_UR,Rail_ULRD,Station_UD,Station_LR]
+	return type in [Types.Tile.Rail_UD, Types.Tile.Rail_LR, Types.Tile.Rail_LD, Types.Tile.Rail_RD, Types.Tile.Rail_UL, Types.Tile.Rail_UR, Types.Tile.Rail_ULRD, Types.Tile.Station_UD, Types.Tile.Station_LR]
 func CheckForConnections():
 	var score = 0
 	for citiesTile in CitiesCoords:
