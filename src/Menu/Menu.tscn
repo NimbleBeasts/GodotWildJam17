@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Menu/Menu.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/menu/nbSplash.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/menu/bg.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/menu/inactiveButton.png" type="Texture" id=3]
 [ext_resource path="res://assets/art/menu/hoverButton.png" type="Texture" id=4]
 [ext_resource path="res://assets/art/menu/pressedButton.png" type="Texture" id=5]
 [ext_resource path="res://assets/art/menu/activeButton.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/MenuFont.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/fonts/NormalFont.tres" type="DynamicFont" id=8]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -26,13 +27,23 @@ expand = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="BtnDbg" type="Button" parent="Main"]
+margin_left = 256.0
+margin_top = 112.0
+margin_right = 384.0
+margin_bottom = 132.0
+text = "Debug InstaPlay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ButtonExit" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -64.0
-margin_top = 256.0
-margin_right = 64.0
-margin_bottom = 280.0
+margin_left = -288.0
+margin_top = 296.0
+margin_right = -160.0
+margin_bottom = 320.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -57,13 +68,41 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ButtonCredits" type="TextureButton" parent="Main"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -288.0
+margin_top = 248.0
+margin_right = -160.0
+margin_bottom = 272.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+
+[node name="Text" type="RichTextLabel" parent="Main/ButtonCredits"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Credits[/center]"
+text = "Credits"
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="ButtonSettings" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -64.0
-margin_top = 224.0
-margin_right = 64.0
-margin_bottom = 248.0
+margin_left = -288.0
+margin_top = 216.0
+margin_right = -160.0
+margin_bottom = 240.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -85,13 +124,44 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ButtonMp" type="TextureButton" parent="Main"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -288.0
+margin_top = 176.0
+margin_right = -160.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Main/ButtonMp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Multi Player[/center]"
+text = "Multi Player"
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="ButtonPlay" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -64.0
-margin_top = 176.0
-margin_right = 64.0
-margin_bottom = 200.0
+margin_left = -288.0
+margin_top = 144.0
+margin_right = -160.0
+margin_bottom = 168.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -107,11 +177,297 @@ margin_bottom = -4.0
 mouse_filter = 1
 custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Play[/center]"
-text = "Play"
+bbcode_text = "[center]Single Player[/center]"
+text = "Single Player"
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="SinglePlayer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="SinglePlayer"]
+margin_left = 176.0
+margin_top = 144.0
+margin_right = 608.0
+margin_bottom = 320.0
+color = Color( 0.282353, 0.290196, 0.466667, 1 )
+
+[node name="ButtonBack" type="TextureButton" parent="SinglePlayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -288.0
+margin_top = 144.0
+margin_right = -160.0
+margin_bottom = 168.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="SinglePlayer/ButtonBack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Back[/center]"
+text = "Back"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="SinglePlayer"]
+margin_left = 184.0
+margin_top = 152.0
+margin_right = 261.0
+margin_bottom = 176.0
+text = "Singleplayer"
+
+[node name="Label2" type="Label" parent="SinglePlayer"]
+margin_left = 192.0
+margin_top = 288.0
+margin_right = 256.0
+margin_bottom = 312.0
+text = "Tutorial Campaign"
+
+[node name="Label3" type="Label" parent="SinglePlayer"]
+margin_left = 456.0
+margin_top = 288.0
+margin_right = 512.0
+margin_bottom = 312.0
+text = "Random"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Multiplayer" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bg" type="ColorRect" parent="Multiplayer"]
+margin_left = 176.0
+margin_top = 144.0
+margin_right = 608.0
+margin_bottom = 320.0
+color = Color( 0.282353, 0.290196, 0.466667, 1 )
+
+[node name="ButtonBack" type="TextureButton" parent="Multiplayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -288.0
+margin_top = 144.0
+margin_right = -160.0
+margin_bottom = 168.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Multiplayer/ButtonBack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Back[/center]"
+text = "Back"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CnJoinGame" type="Control" parent="Multiplayer"]
+margin_left = 192.0
+margin_top = 160.0
+margin_right = 592.0
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelIp" type="Label" parent="Multiplayer/CnJoinGame"]
+margin_left = 8.0
+margin_top = 12.0
+margin_right = 97.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 7 )
+text = "Host's IP:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TeIp" type="TextEdit" parent="Multiplayer/CnJoinGame"]
+margin_left = 80.0
+margin_top = 8.0
+margin_right = 256.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 8 )
+text = " 127.0.0.1:27666"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonJoin" type="TextureButton" parent="Multiplayer/CnJoinGame"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 72.0
+margin_top = 8.0
+margin_right = 200.0
+margin_bottom = 32.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Multiplayer/CnJoinGame/ButtonJoin"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Join Game[/center]"
+text = "Join Game"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Seperator" type="ColorRect" parent="Multiplayer"]
+margin_left = 192.0
+margin_top = 200.0
+margin_right = 592.0
+margin_bottom = 204.0
+color = Color( 0.301961, 0.396078, 0.705882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CnHostGame" type="Control" parent="Multiplayer"]
+margin_left = 192.0
+margin_top = 216.0
+margin_right = 592.0
+margin_bottom = 304.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelPort" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = 32.0
+margin_top = 60.0
+margin_right = 97.0
+margin_bottom = 76.0
+custom_fonts/font = ExtResource( 7 )
+text = "Port:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TePort" type="TextEdit" parent="Multiplayer/CnHostGame"]
+margin_left = 80.0
+margin_top = 56.0
+margin_right = 160.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 8 )
+text = " 27666"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonLocal" type="TextureButton" parent="Multiplayer/CnHostGame"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 72.0
+margin_top = 16.0
+margin_right = 200.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Multiplayer/CnHostGame/ButtonLocal"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Local Game[/center]"
+text = "Local Game"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonHost" type="TextureButton" parent="Multiplayer/CnHostGame"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 72.0
+margin_top = 56.0
+margin_right = 200.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Multiplayer/CnHostGame/ButtonHost"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Host Game[/center]"
+text = "Host Game"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = 32.0
+margin_right = 184.0
+margin_bottom = 32.0
+text = "Todo: Difficulty"
 
 [node name="Settings" type="Control" parent="."]
 visible = false
@@ -121,13 +477,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ColorRect" type="ColorRect" parent="Settings"]
+margin_left = 176.0
+margin_top = 144.0
+margin_right = 608.0
+margin_bottom = 320.0
+color = Color( 0.282353, 0.290196, 0.466667, 1 )
+
 [node name="ButtonLights" type="TextureButton" parent="Settings"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -64.0
-margin_top = 224.0
-margin_right = 64.0
-margin_bottom = 248.0
+margin_top = 208.0
+margin_right = 128.0
+margin_bottom = 232.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -155,10 +517,10 @@ __meta__ = {
 [node name="ButtonBack" type="TextureButton" parent="Settings"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -64.0
-margin_top = 256.0
-margin_right = 64.0
-margin_bottom = 280.0
+margin_left = -288.0
+margin_top = 144.0
+margin_right = -160.0
+margin_bottom = 168.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -168,6 +530,69 @@ __meta__ = {
 }
 
 [node name="Text" type="RichTextLabel" parent="Settings/ButtonBack"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Back[/center]"
+text = "Back"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="Settings"]
+margin_left = 200.0
+margin_top = 152.0
+margin_right = 280.0
+margin_bottom = 176.0
+text = "Do we need settings?"
+
+[node name="Credits" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="Credits"]
+margin_left = 176.0
+margin_top = 144.0
+margin_right = 608.0
+margin_bottom = 320.0
+color = Color( 0.282353, 0.290196, 0.466667, 1 )
+
+[node name="Label" type="Label" parent="Credits"]
+margin_left = 184.0
+margin_top = 152.0
+margin_right = 341.0
+margin_bottom = 200.0
+text = "Cool credits yet to come"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonBack" type="TextureButton" parent="Credits"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -288.0
+margin_top = 144.0
+margin_right = -160.0
+margin_bottom = 168.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Credits/ButtonBack"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -203,8 +628,17 @@ custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[right]Version[/right]"
 text = "Version"
+[connection signal="button_up" from="Main/BtnDbg" to="." method="_on_BtnDbg_button_up"]
 [connection signal="button_up" from="Main/ButtonExit" to="." method="_on_ButtonExit_button_up"]
+[connection signal="button_up" from="Main/ButtonCredits" to="." method="_on_ButtonCredits_button_up"]
 [connection signal="button_up" from="Main/ButtonSettings" to="." method="_on_ButtonSettings_button_up"]
+[connection signal="button_up" from="Main/ButtonMp" to="." method="_on_ButtonMp_button_up"]
 [connection signal="button_up" from="Main/ButtonPlay" to="." method="_on_ButtonPlay_button_up"]
+[connection signal="button_up" from="SinglePlayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
+[connection signal="button_up" from="Multiplayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
+[connection signal="button_up" from="Multiplayer/CnJoinGame/ButtonJoin" to="." method="_on_ButtonJoin_button_up"]
+[connection signal="button_up" from="Multiplayer/CnHostGame/ButtonLocal" to="." method="_on_ButtonLocal_button_up"]
+[connection signal="button_up" from="Multiplayer/CnHostGame/ButtonHost" to="." method="_on_ButtonHost_button_up"]
 [connection signal="button_up" from="Settings/ButtonLights" to="." method="_on_ButtonLights_button_up"]
 [connection signal="button_up" from="Settings/ButtonBack" to="." method="_on_ButtonBack_button_up"]
+[connection signal="button_up" from="Credits/ButtonBack" to="." method="_on_ButtonBack_button_up"]
