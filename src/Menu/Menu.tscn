@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/menu/bg.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/art/menu/activeButton.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/MenuFont.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/fonts/NormalFont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://assets/art/menu/trainguy.png" type="Texture" id=9]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -26,12 +27,18 @@ expand = true
 [node name="Main" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Main"]
+position = Vector2( 568, 268 )
+texture = ExtResource( 9 )
 
 [node name="BtnDbg" type="Button" parent="Main"]
 margin_left = 256.0
-margin_top = 112.0
 margin_right = 384.0
-margin_bottom = 132.0
+margin_bottom = 20.0
 text = "Debug InstaPlay"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -40,9 +47,9 @@ __meta__ = {
 [node name="ButtonExit" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -288.0
+margin_left = -64.0
 margin_top = 296.0
-margin_right = -160.0
+margin_right = 64.0
 margin_bottom = 320.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
@@ -71,9 +78,9 @@ __meta__ = {
 [node name="ButtonCredits" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -288.0
+margin_left = -64.0
 margin_top = 248.0
-margin_right = -160.0
+margin_right = 64.0
 margin_bottom = 272.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
@@ -99,9 +106,9 @@ __meta__ = {
 [node name="ButtonSettings" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -288.0
+margin_left = -64.0
 margin_top = 216.0
-margin_right = -160.0
+margin_right = 64.0
 margin_bottom = 240.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
@@ -127,9 +134,9 @@ __meta__ = {
 [node name="ButtonMp" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -288.0
+margin_left = -64.0
 margin_top = 176.0
-margin_right = -160.0
+margin_right = 64.0
 margin_bottom = 200.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
@@ -158,9 +165,9 @@ __meta__ = {
 [node name="ButtonPlay" type="TextureButton" parent="Main"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -288.0
+margin_left = -64.0
 margin_top = 144.0
-margin_right = -160.0
+margin_right = 64.0
 margin_bottom = 168.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
@@ -184,6 +191,7 @@ __meta__ = {
 }
 
 [node name="SinglePlayer" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
