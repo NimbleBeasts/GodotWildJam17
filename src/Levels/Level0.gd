@@ -31,7 +31,7 @@ func _ready():
 	for i in range(ObstaclesCount):
 		var obstacle = obstacleScene.instance()
 		randomize()
-		var type = Types.Tile.values()[randi() % Types.ObstaclesCount+1]
+		var type = [ Types.Tile.Mountains, Types.Tile.Forest][randi() % 2]
 		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
 		TilesGrid.tilesContent[coords] = type
 		FreeTiles.erase(coords)
@@ -50,6 +50,18 @@ func _ready():
 		#place the cities tile in the corresponding tile
 		TilesGrid.CitiesCoords.append(coords)
 		TilesGrid.get_child(TilesGrid.CoordsToIndex(coords)).add_child(cities)
+	#load factories tiles 
+	for n in range(Types.FactoriesCount):
+		var factory = obstacleScene.instance()
+		randomize()
+		var type = Types.Tile.Factory
+		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		TilesGrid.tilesContent[coords] = type
+		FreeTiles.erase(coords)
+		factory.frame = type
+		#place the factory tile in the corresponding tile
+		TilesGrid.CitiesCoords.append(coords)
+		TilesGrid.get_child(TilesGrid.CoordsToIndex(coords)).add_child(factory)
 func ShowNextCard():
 	Deck.remove(0)
 	TopCard = Deck[0]
