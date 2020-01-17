@@ -191,19 +191,41 @@ __meta__ = {
 }
 
 [node name="SinglePlayer" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ColorRect" type="ColorRect" parent="SinglePlayer"]
+[node name="Bg1" type="ColorRect" parent="SinglePlayer"]
 margin_left = 176.0
+margin_top = 144.0
+margin_right = 320.0
+margin_bottom = 320.0
+color = Color( 0.282353, 0.290196, 0.466667, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg2" type="ColorRect" parent="SinglePlayer"]
+margin_left = 320.0
+margin_top = 144.0
+margin_right = 464.0
+margin_bottom = 320.0
+color = Color( 0.337255, 0.345098, 0.529412, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg3" type="ColorRect" parent="SinglePlayer"]
+margin_left = 464.0
 margin_top = 144.0
 margin_right = 608.0
 margin_bottom = 320.0
 color = Color( 0.282353, 0.290196, 0.466667, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonBack" type="TextureButton" parent="SinglePlayer"]
 anchor_left = 0.5
@@ -236,29 +258,214 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="SinglePlayer"]
-margin_left = 184.0
-margin_top = 152.0
-margin_right = 261.0
-margin_bottom = 176.0
-text = "Singleplayer"
-
-[node name="Label2" type="Label" parent="SinglePlayer"]
-margin_left = 192.0
-margin_top = 288.0
-margin_right = 256.0
-margin_bottom = 312.0
-text = "Tutorial Campaign"
-
-[node name="Label3" type="Label" parent="SinglePlayer"]
-margin_left = 456.0
-margin_top = 288.0
-margin_right = 512.0
-margin_bottom = 312.0
-text = "Random"
+[node name="ButtonTutorial" type="TextureButton" parent="SinglePlayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -136.0
+margin_top = 280.0
+margin_right = -8.0
+margin_bottom = 304.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Text" type="RichTextLabel" parent="SinglePlayer/ButtonTutorial"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Play Tutorial[/center]"
+text = "Play Tutorial"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonDaily" type="TextureButton" parent="SinglePlayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 8.0
+margin_top = 280.0
+margin_right = 136.0
+margin_bottom = 304.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="SinglePlayer/ButtonDaily"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Daily Challenge[/center]"
+text = "Daily Challenge"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Custom" type="Control" parent="SinglePlayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelDifficulty2" type="Label" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 144.0
+margin_right = 560.0
+margin_bottom = 168.0
+rect_pivot_offset = Vector2( 56, 16 )
+custom_fonts/font = ExtResource( 7 )
+text = "Difficulty:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelCities2" type="Label" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 176.0
+margin_right = 552.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 56, -16 )
+custom_fonts/font = ExtResource( 7 )
+text = "(Cities: 4)"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SDifficulty2" type="HSlider" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 160.0
+margin_right = 600.0
+margin_bottom = 184.0
+rect_pivot_offset = Vector2( 56, 0 )
+min_value = 4.0
+max_value = 6.0
+value = 4.0
+tick_count = 3
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelDifficulty3" type="Label" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 192.0
+margin_right = 560.0
+margin_bottom = 216.0
+rect_pivot_offset = Vector2( 56, 16 )
+custom_fonts/font = ExtResource( 7 )
+text = "Turns: 30"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelCities3" type="Label" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 224.0
+margin_right = 552.0
+margin_bottom = 248.0
+rect_pivot_offset = Vector2( 56, -16 )
+custom_fonts/font = ExtResource( 7 )
+text = "Seed:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SDifficulty3" type="HSlider" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 208.0
+margin_right = 600.0
+margin_bottom = 232.0
+rect_pivot_offset = Vector2( 56, 0 )
+min_value = 4.0
+max_value = 6.0
+value = 4.0
+tick_count = 3
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonCustom" type="TextureButton" parent="SinglePlayer/Custom"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 452.0
+margin_top = 280.0
+margin_right = 580.0
+margin_bottom = 304.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="SinglePlayer/Custom/ButtonCustom"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Custom Game[/center]"
+text = "Custom Game"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TextEdit" type="TextEdit" parent="SinglePlayer/Custom"]
+margin_left = 472.0
+margin_top = 248.0
+margin_right = 600.0
+margin_bottom = 272.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SinglePlayer/Custom"]
+margin_left = 328.0
+margin_top = 152.0
+margin_right = 464.0
+margin_bottom = 272.0
+custom_fonts/normal_font = ExtResource( 7 )
+text = "Play todays challenge and share your results on Twitter using the tag #RailNWrite"
+scroll_active = false
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="SinglePlayer/Custom"]
+margin_left = 184.0
+margin_top = 152.0
+margin_right = 320.0
+margin_bottom = 272.0
+custom_fonts/normal_font = ExtResource( 7 )
+text = "Complete the tutorial to get familiar with the rules and unlock the other game modes."
+scroll_active = false
 
 [node name="Multiplayer" type="Control" parent="."]
 visible = false
@@ -317,11 +524,13 @@ __meta__ = {
 
 [node name="LabelIp" type="Label" parent="Multiplayer/CnJoinGame"]
 margin_left = 8.0
-margin_top = 12.0
-margin_right = 97.0
-margin_bottom = 28.0
+margin_top = 8.0
+margin_right = 72.0
+margin_bottom = 32.0
 custom_fonts/font = ExtResource( 7 )
 text = "Host's IP:"
+align = 2
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -370,10 +579,10 @@ __meta__ = {
 
 [node name="Seperator" type="ColorRect" parent="Multiplayer"]
 margin_left = 192.0
-margin_top = 200.0
+margin_top = 210.0
 margin_right = 592.0
-margin_bottom = 204.0
-color = Color( 0.301961, 0.396078, 0.705882, 1 )
+margin_bottom = 214.0
+color = Color( 0.196078, 0.2, 0.32549, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -388,12 +597,38 @@ __meta__ = {
 }
 
 [node name="LabelPort" type="Label" parent="Multiplayer/CnHostGame"]
-margin_left = 32.0
-margin_top = 60.0
-margin_right = 97.0
-margin_bottom = 76.0
+margin_top = 56.0
+margin_right = 72.0
+margin_bottom = 80.0
 custom_fonts/font = ExtResource( 7 )
 text = "Port:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelDifficulty" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = -8.0
+margin_top = 16.0
+margin_right = 72.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 7 )
+text = "Difficulty:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelCities" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = 168.0
+margin_top = 16.0
+margin_right = 248.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 7 )
+text = "(Cities: 4)"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -471,11 +706,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="Multiplayer/CnHostGame"]
-margin_left = 32.0
-margin_right = 184.0
-margin_bottom = 32.0
-text = "Todo: Difficulty"
+[node name="SDifficulty" type="HSlider" parent="Multiplayer/CnHostGame"]
+margin_left = 80.0
+margin_top = 16.0
+margin_right = 160.0
+margin_bottom = 40.0
+min_value = 4.0
+max_value = 6.0
+value = 4.0
+tick_count = 3
+ticks_on_borders = true
 
 [node name="Settings" type="Control" parent="."]
 visible = false
@@ -643,10 +883,16 @@ text = "Version"
 [connection signal="button_up" from="Main/ButtonMp" to="." method="_on_ButtonMp_button_up"]
 [connection signal="button_up" from="Main/ButtonPlay" to="." method="_on_ButtonPlay_button_up"]
 [connection signal="button_up" from="SinglePlayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
+[connection signal="button_up" from="SinglePlayer/ButtonTutorial" to="." method="_on_ButtonBack_button_up"]
+[connection signal="button_up" from="SinglePlayer/ButtonDaily" to="." method="_on_ButtonBack_button_up"]
+[connection signal="value_changed" from="SinglePlayer/Custom/SDifficulty2" to="." method="_on_SDifficulty_value_changed"]
+[connection signal="value_changed" from="SinglePlayer/Custom/SDifficulty3" to="." method="_on_SDifficulty_value_changed"]
+[connection signal="button_up" from="SinglePlayer/Custom/ButtonCustom" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Multiplayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Multiplayer/CnJoinGame/ButtonJoin" to="." method="_on_ButtonJoin_button_up"]
 [connection signal="button_up" from="Multiplayer/CnHostGame/ButtonLocal" to="." method="_on_ButtonLocal_button_up"]
 [connection signal="button_up" from="Multiplayer/CnHostGame/ButtonHost" to="." method="_on_ButtonHost_button_up"]
+[connection signal="value_changed" from="Multiplayer/CnHostGame/SDifficulty" to="." method="_on_SDifficulty_value_changed"]
 [connection signal="button_up" from="Settings/ButtonFullscreen" to="." method="_on_ButtonFullscreen_button_up"]
 [connection signal="button_up" from="Settings/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Credits/ButtonBack" to="." method="_on_ButtonBack_button_up"]

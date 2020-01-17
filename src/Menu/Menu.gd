@@ -82,17 +82,25 @@ func _on_ButtonMp_button_up():
 
 # Multiplayer Related
 func _on_ButtonLocal_button_up():
-	pass # Replace with function body.
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		print("Local Game")
 
 
 func _on_ButtonHost_button_up():
-	pass # Replace with function body.
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		print("Host Game")
 
 
 func _on_ButtonJoin_button_up():
-	pass # Replace with function body.
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		print("Join Game")
 
 
 func _on_ButtonFullscreen_button_up():
-	Global.fullscreen()
-	updateSettings()
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		Global.fullscreen()
+		updateSettings()
+
+
+func _on_SDifficulty_value_changed(value):
+	$Multiplayer/CnHostGame/LabelCities.set_text("(Cities: "+ str(int(value)) +")")
