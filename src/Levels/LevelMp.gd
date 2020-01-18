@@ -6,7 +6,7 @@ func setup(payload):#no need for this in local multi, for now...
 func _ready():
 	LevelManager.DecideFirstPlayer()
 	LevelManager.InitializeComponents(Types.GameMode.MpLocalGame)
-	
+	LevelManager.InitializeTiles()
 	LevelManager.InitializeGrid($Player1/TilesGrid)
 	LevelManager.InitializeGrid($Player2/TilesGrid)
 
