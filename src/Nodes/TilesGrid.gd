@@ -1,5 +1,6 @@
 extends GridContainer
 var tilesContent = {} #{[x,y]:content}
+var OccupiedTilesCount = 0
 var CitiesCoords = []
 var SpecialTilesCoords = [] #[[type, coords]]
 var DisconnectedStations = []#[[type, coords]]

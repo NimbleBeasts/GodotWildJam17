@@ -8,6 +8,7 @@ extends Control
 
 const levels = [
 	"res://src/Levels/Level0.tscn",
+	"res://src/Levels/LevelMp.tscn"
 ]
 
 var state = Types.GameStates.Menu

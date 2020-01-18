@@ -65,7 +65,7 @@ func _ready():
 func ShowNextCard():
 	Deck.remove(0)
 	TopCard = Deck[0]
-	$Deck/TopCard.frame = Deck[0]
+	$Deck/TopCard.frame = Deck[0]-3
 
 func _on_Button_pressed():
 	TilesGrid.CheckForConnections()
