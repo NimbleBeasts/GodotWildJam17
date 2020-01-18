@@ -55,9 +55,24 @@ func newGame(gameMode, payLoad = null):
 	if levelNode:
 		unloadLevel()
 
-	#TODO: matching game mode, unwrap payload
+	match gameMode:
+		Types.GameMode.Tutorial:
+			loadLevel(0)
+		Types.GameMode.CustomGame:
+			loadLevel(0)
+		Types.GameMode.DailyChallenge:
+			loadLevel(0)
+		Types.GameMode.MpHostGame:
+			loadLevel(1)
+		Types.GameMode.MpJoinGame:
+			loadLevel(1)
+		Types.GameMode.MpLocalGame:
+			loadLevel(1)
+		_:
+			print("Error: Unhandled game mode requested")
 
-	loadLevel(0)
+	#Hand over payload
+	levelNode.setup(payLoad) 
 	stateTransition(Types.GameStates.Game)
 
 func setLights(state):
