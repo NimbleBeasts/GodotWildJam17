@@ -2,6 +2,7 @@ extends Node
 
 enum Direction { Top, Left, Right, Down }
 enum GameStates {Menu, Game, Settings} 
+enum GameMode {Tutorial, DailyChallenge, CustomGame, MpLocalGame, MpJoinGame, MpHostGame}
 
 const TileVframes = 4
 const TileHframes = 4

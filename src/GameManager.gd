@@ -51,9 +51,12 @@ func unloadLevel():
 	levelNode.queue_free()
 	levelNode = null
 
-func newGame():
+func newGame(gameMode, payLoad = null):
 	if levelNode:
 		unloadLevel()
+
+	#TODO: matching game mode, unwrap payload
+
 	loadLevel(0)
 	stateTransition(Types.GameStates.Game)
 
@@ -62,3 +65,5 @@ func setLights(state):
 
 func getLights():
 	return lights
+
+
