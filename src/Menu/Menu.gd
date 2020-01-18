@@ -109,13 +109,17 @@ func _on_ButtonMp_button_up():
 # Multiplayer Related
 func _on_ButtonLocal_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
-		Global.getGameManager().newGame(Types.GameMode.MpLocalGame)
+		var cities = $Multiplayer/CnHostGame/SDifficulty.value
+		var obstacles = $Multiplayer/CnHostGame/SObstacles.value
+		Global.getGameManager().newGame(Types.GameMode.MpLocalGame, {"cities": cities, "obstacles": obstacles})
 
 
 func _on_ButtonHost_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
 		var port = int($Multiplayer/CnHostGame/TePort.text)
-		Global.getGameManager().newGame(Types.GameMode.MpHostGame, {"port": port})
+		var cities = $Multiplayer/CnHostGame/SDifficulty.value
+		var obstacles = $Multiplayer/CnHostGame/SObstacles.value
+		Global.getGameManager().newGame(Types.GameMode.MpHostGame, {"port": port, "cities": cities, "obstacles": obstacles})
 
 
 func _on_ButtonJoin_button_up():
@@ -125,11 +129,11 @@ func _on_ButtonJoin_button_up():
 		
 		if ipData.size() == 2:
 			#Trim whitespaces
-			ipData[0] = trim(ipData[0])
-			ipData[1] = int(trim(ipData[1]))
+			var ip = trim(ipData[0])
+			var port = int(trim(ipData[1]))
 			
-			if ipData[0].is_valid_ip_address():
-				Global.getGameManager().newGame(Types.GameMode.MpJoinGame, {"IP": ipData[0], "port": ipData[1]})
+			if ip.is_valid_ip_address():
+				Global.getGameManager().newGame(Types.GameMode.MpJoinGame, {"IP": ip, "port": port})
 			else:
 				print("Error: IP not valid")
 		else:
@@ -141,9 +145,9 @@ func _on_ButtonJoin_button_up():
 func _on_ButtonCustom_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
 		var difficulty = $SinglePlayer/Custom/SCgDifficulty.value
-		var turns = $SinglePlayer/Custom/SCgTurn.value
+		var obstacles = $SinglePlayer/Custom/SCgObstacles.value
 		var tSeed = int($SinglePlayer/Custom/TeSeed.text)
-		Global.getGameManager().newGame(Types.GameMode.CustomGame, {"difficulty": difficulty, "turns": turns, "seed": tSeed})
+		Global.getGameManager().newGame(Types.GameMode.CustomGame, {"cities": difficulty, "obstacles": obstacles, "seed": tSeed})
 
 func _on_ButtonNewSeed_button_up():
 	$SinglePlayer/Custom/TeSeed.text = str(generateSeed())
@@ -160,12 +164,14 @@ func _on_ButtonTutorial_button_up():
 
 # Sliders
 func _on_SDifficulty_value_changed(value):
-	$Multiplayer/CnHostGame/LabelCities.set_text("(Cities: "+ str(int(value)) +")")
+	$Multiplayer/CnHostGame/LabelDifficultyCount.set_text(str(int(value)))
 
 func _on_SCgDifficulty_value_changed(value):
-	$SinglePlayer/Custom/LabelCgCities.set_text("(Cities: "+ str(int(value)) +")")
+	$SinglePlayer/Custom/LabelCgDifficulty.set_text("Cities: "+ str(int(value)) )
 
-func _on_SCgTurn_value_changed(value):
-	$SinglePlayer/Custom/LabelCgTurns.set_text("Turns:" + str(int(value)))
+func _on_SCgObstacles_value_changed(value):
+	$SinglePlayer/Custom/LabelCgObstacles.set_text("Obstacles: " + str(int(value)))
 
 
+func _on_SObstacles_value_changed(value):
+	$Multiplayer/CnHostGame/LabelObstaclesCount.set_text(str(int(value)))

@@ -194,6 +194,7 @@ __meta__ = {
 }
 
 [node name="SinglePlayer" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -270,25 +271,12 @@ __meta__ = {
 
 [node name="LabelCgDifficulty" type="Label" parent="SinglePlayer/Custom"]
 margin_left = 472.0
-margin_top = 144.0
+margin_top = 152.0
 margin_right = 560.0
-margin_bottom = 168.0
+margin_bottom = 176.0
 rect_pivot_offset = Vector2( 56, 16 )
 custom_fonts/font = ExtResource( 7 )
-text = "Difficulty:"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelCgCities" type="Label" parent="SinglePlayer/Custom"]
-margin_left = 472.0
-margin_top = 176.0
-margin_right = 552.0
-margin_bottom = 200.0
-rect_pivot_offset = Vector2( 56, -16 )
-custom_fonts/font = ExtResource( 7 )
-text = "(Cities: 4)"
+text = "Cities: 4"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -296,9 +284,9 @@ __meta__ = {
 
 [node name="SCgDifficulty" type="HSlider" parent="SinglePlayer/Custom"]
 margin_left = 472.0
-margin_top = 160.0
+margin_top = 168.0
 margin_right = 600.0
-margin_bottom = 184.0
+margin_bottom = 192.0
 rect_pivot_offset = Vector2( 56, 0 )
 min_value = 4.0
 max_value = 6.0
@@ -309,29 +297,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelCgTurns" type="Label" parent="SinglePlayer/Custom"]
+[node name="LabelCgObstacles" type="Label" parent="SinglePlayer/Custom"]
 margin_left = 472.0
 margin_top = 192.0
 margin_right = 560.0
 margin_bottom = 216.0
 rect_pivot_offset = Vector2( 56, 16 )
 custom_fonts/font = ExtResource( 7 )
-text = "Turns: 30"
+text = "Obstacles: 16"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SCgTurn" type="HSlider" parent="SinglePlayer/Custom"]
+[node name="SCgObstacles" type="HSlider" parent="SinglePlayer/Custom"]
 margin_left = 472.0
 margin_top = 208.0
 margin_right = 600.0
 margin_bottom = 232.0
 rect_pivot_offset = Vector2( 56, 0 )
-min_value = 20.0
-max_value = 40.0
-value = 30.0
-tick_count = 10
+min_value = 6.0
+max_value = 16.0
+value = 16.0
+tick_count = 6
 ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -499,7 +487,6 @@ __meta__ = {
 }
 
 [node name="Multiplayer" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -628,9 +615,9 @@ __meta__ = {
 }
 
 [node name="LabelPort" type="Label" parent="Multiplayer/CnHostGame"]
-margin_top = 56.0
+margin_top = 72.0
 margin_right = 72.0
-margin_bottom = 80.0
+margin_bottom = 96.0
 custom_fonts/font = ExtResource( 7 )
 text = "Port:"
 align = 2
@@ -639,38 +626,88 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TePort" type="TextEdit" parent="Multiplayer/CnHostGame"]
+margin_left = 80.0
+margin_top = 72.0
+margin_right = 160.0
+margin_bottom = 96.0
+custom_fonts/font = ExtResource( 8 )
+text = " 27666"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LabelDifficulty" type="Label" parent="Multiplayer/CnHostGame"]
 margin_left = -8.0
-margin_top = 16.0
+margin_top = 8.0
 margin_right = 72.0
-margin_bottom = 40.0
+margin_bottom = 32.0
 custom_fonts/font = ExtResource( 7 )
-text = "Difficulty:"
+text = "Cities:"
 align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelCities" type="Label" parent="Multiplayer/CnHostGame"]
-margin_left = 168.0
-margin_top = 16.0
-margin_right = 248.0
-margin_bottom = 40.0
+[node name="SDifficulty" type="HSlider" parent="Multiplayer/CnHostGame"]
+margin_left = 80.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 32.0
+min_value = 4.0
+max_value = 6.0
+value = 4.0
+tick_count = 3
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelDifficultyCount" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = 200.0
+margin_top = 8.0
+margin_right = 224.0
+margin_bottom = 32.0
 custom_fonts/font = ExtResource( 7 )
-text = "(Cities: 4)"
+text = "4"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TePort" type="TextEdit" parent="Multiplayer/CnHostGame"]
+[node name="LabelObstacles" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = -8.0
+margin_top = 40.0
+margin_right = 72.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 7 )
+text = "Obstacles:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SObstacles" type="HSlider" parent="Multiplayer/CnHostGame"]
 margin_left = 80.0
-margin_top = 56.0
-margin_right = 160.0
-margin_bottom = 80.0
-custom_fonts/font = ExtResource( 8 )
-text = " 27666"
+margin_top = 40.0
+margin_right = 192.0
+margin_bottom = 64.0
+min_value = 6.0
+max_value = 16.0
+value = 16.0
+tick_count = 6
+ticks_on_borders = true
+
+[node name="LabelObstaclesCount" type="Label" parent="Multiplayer/CnHostGame"]
+margin_left = 200.0
+margin_top = 40.0
+margin_right = 224.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 7 )
+text = "16"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -736,17 +773,6 @@ text = "Host Game"
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="SDifficulty" type="HSlider" parent="Multiplayer/CnHostGame"]
-margin_left = 80.0
-margin_top = 16.0
-margin_right = 160.0
-margin_bottom = 40.0
-min_value = 4.0
-max_value = 6.0
-value = 4.0
-tick_count = 3
-ticks_on_borders = true
 
 [node name="Settings" type="Control" parent="."]
 visible = false
@@ -915,16 +941,17 @@ text = "Version"
 [connection signal="button_up" from="Main/ButtonPlay" to="." method="_on_ButtonPlay_button_up"]
 [connection signal="button_up" from="SinglePlayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="value_changed" from="SinglePlayer/Custom/SCgDifficulty" to="." method="_on_SCgDifficulty_value_changed"]
-[connection signal="value_changed" from="SinglePlayer/Custom/SCgTurn" to="." method="_on_SCgTurn_value_changed"]
+[connection signal="value_changed" from="SinglePlayer/Custom/SCgObstacles" to="." method="_on_SCgObstacles_value_changed"]
 [connection signal="button_up" from="SinglePlayer/Custom/ButtonNewSeed" to="." method="_on_ButtonNewSeed_button_up"]
 [connection signal="button_up" from="SinglePlayer/Custom/ButtonCustom" to="." method="_on_ButtonCustom_button_up"]
 [connection signal="button_up" from="SinglePlayer/Custom/ButtonDaily" to="." method="_on_ButtonDaily_button_up"]
 [connection signal="button_up" from="SinglePlayer/Custom/ButtonTutorial" to="." method="_on_ButtonTutorial_button_up"]
 [connection signal="button_up" from="Multiplayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Multiplayer/CnJoinGame/ButtonJoin" to="." method="_on_ButtonJoin_button_up"]
+[connection signal="value_changed" from="Multiplayer/CnHostGame/SDifficulty" to="." method="_on_SDifficulty_value_changed"]
+[connection signal="value_changed" from="Multiplayer/CnHostGame/SObstacles" to="." method="_on_SObstacles_value_changed"]
 [connection signal="button_up" from="Multiplayer/CnHostGame/ButtonLocal" to="." method="_on_ButtonLocal_button_up"]
 [connection signal="button_up" from="Multiplayer/CnHostGame/ButtonHost" to="." method="_on_ButtonHost_button_up"]
-[connection signal="value_changed" from="Multiplayer/CnHostGame/SDifficulty" to="." method="_on_SDifficulty_value_changed"]
 [connection signal="button_up" from="Settings/ButtonFullscreen" to="." method="_on_ButtonFullscreen_button_up"]
 [connection signal="button_up" from="Settings/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Credits/ButtonBack" to="." method="_on_ButtonBack_button_up"]
