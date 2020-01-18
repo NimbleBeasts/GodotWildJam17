@@ -64,51 +64,8 @@ func InitializeComponents(mode):#modes: 0=single_player, 1=shared_screen_multi, 
 			TopCard2 = Deck2[0]
 			DeckNode1 = Global.gm.levelNode.get_node('Player1/Deck')
 			DeckNode2 = Global.gm.levelNode.get_node('Player2/Deck')
-			
-			
-var InitialGrid = {}
-
-func WhatsNearMeOnThe(direction,my_coord,where):#null when there's no tile or the tile is empty
-	var result = [null,null]
-	var movement = [[0,-1], [-1,0], [1,0], [0,1]] #which coordinate (x or y) to change to move in the direction
-	var coords = [my_coords[0]+movement[direction][0], my_coords[1]+movement[direction][1]]
-	if  coords[0] in range(GridDimensions) and coords[1] in range(GridDimensions):
-		result = [where[coords],coords]
-	return result
-
-func InitializeTiles():
-	var FreeTiles = {}
-	for j in range(GridDimensions):
-		for i in range(GridDimensions):
-			InitialGrid[[i,j]] =null
-	FreeTiles = InitialGrid.duplicate(true)
-	randomize()
-	
-	for i in range(ObstaclesCount):
-		var type = [ Types.Tile.Mountains, Types.Tile.Forest][randi() % 2]
-		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
-		InitialGrid[coords] = type
-		FreeTiles.erase(coords)
-
-	var quadrants = [{},{},{},{}]
-	for limits in [[[0,0],[3,3]],[[4,0],[7,3]],[[0,4],[3,7]],[[4,4],[7,7]]]:
-		for i in range(4):
-			var limit = limits[i]
-			for y in range(limit[0][1],limit[1][1]+1):
-				for x in range(limit[0][0],limit[1][0]+1):
-					quadrants[i][[x,y]] = null
-	#remove occupied tiles  from quadrants
-	for n in range(CitiesCount):
-		var type = Types.Tile.Buildings
-		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
-		InitialGrid[coords] = type
-		FreeTiles.erase(coords)
-		
-	for n in range(Types.FactoriesCount):
-		var type = Types.Tile.Factory
-		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
-		InitialGrid[coords] = type
-		FreeTiles.erase(coords)
+			InitializeGrid(TilesGrid1)
+			InitializeGrid(TilesGrid2)
 func InitializeGrid(grid):
 	#load the grid
 	grid.columns = GridDimensions
@@ -119,17 +76,46 @@ func InitializeGrid(grid):
 			tile.coords = [i,j]
 			grid.add_child(tile)
 			grid.tilesContent[tile.coords]=null
-	#load the initial tiles
+	#load the initial obstacles
 	var obstacleScene = load("res://src/Nodes/tiles/Obstacle.tscn")
-	for coords in InitialGrid.keys():
-		if InitialGrid[coords]!=null:
-			grid.OccupiedTilesCount += 1
-			var obstacle = obstacleScene.instance()
-			obstacle.frame = InitialGrid[coords]
-			#place the obstacle/city in the corresponding tile
-			grid.get_child(grid.CoordsToIndex(coords)).add_child(obstacle)
-		
-	grid.tilesContent = InitialGrid.duplicate(true)
+	var FreeTiles = grid.tilesContent.duplicate(true)
+	for i in range(ObstaclesCount):
+		grid.OccupiedTilesCount += 1
+		var obstacle = obstacleScene.instance()
+		randomize()
+		var type = [ Types.Tile.Mountains, Types.Tile.Forest][randi() % 2]
+		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		grid.tilesContent[coords] = type
+		FreeTiles.erase(coords)
+		obstacle.frame = type
+		#place the obstacle in the corresponding tile
+		grid.get_child(grid.CoordsToIndex(coords)).add_child(obstacle)
+	#load cities tiles
+	for n in range(CitiesCount):
+		grid.OccupiedTilesCount += 1
+		var cities = obstacleScene.instance()
+		randomize()
+		var type = Types.Tile.Buildings
+		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		grid.tilesContent[coords] = type
+		FreeTiles.erase(coords)
+		cities.frame = type
+		#place the cities tile in the corresponding tile
+		grid.CitiesCoords.append(coords)
+		grid.get_child(grid.CoordsToIndex(coords)).add_child(cities)
+	#load factories tiles 
+	for n in range(Types.FactoriesCount):
+		grid.OccupiedTilesCount += 1
+		var factory = obstacleScene.instance()
+		randomize()
+		var type = Types.Tile.Factory
+		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		grid.tilesContent[coords] = type
+		FreeTiles.erase(coords)
+		factory.frame = type
+		#place the factory tile in the corresponding tile
+		grid.CitiesCoords.append(coords)
+		grid.get_child(grid.CoordsToIndex(coords)).add_child(factory)
 func ShowNextCard():
 	var player = int(CurrentPlayer==1) + 1#because ShowNextCard() is called after NextPlayer() in Tile.gd
 	match gamemode:
