@@ -15,6 +15,13 @@ func _ready():
 	#Seed Initialization
 	_on_ButtonNewSeed_button_up() 
 	dailySeed()
+	$Main/ButtonContinue.hide()
+
+func updateGui():
+	if Global.gm.levelNode:
+		$Main/ButtonContinue.show()
+	else:
+		$Main/ButtonContinue.hide()
 
 func dailySeed():
 	var date = OS.get_date()
@@ -105,6 +112,10 @@ func _on_ButtonMp_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
 		stateTransition(MenuState.Multiplayer)
 
+func _on_ButtonContinue_button_up():
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		Global.getGameManager().continueGame()
+
 
 # Multiplayer Related
 func _on_ButtonLocal_button_up():
@@ -175,3 +186,5 @@ func _on_SCgObstacles_value_changed(value):
 
 func _on_SObstacles_value_changed(value):
 	$Multiplayer/CnHostGame/LabelObstaclesCount.set_text(str(int(value)))
+
+

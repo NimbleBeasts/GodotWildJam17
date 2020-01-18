@@ -40,8 +40,9 @@ texture = ExtResource( 9 )
 
 [node name="BtnDbg" type="Button" parent="Main"]
 margin_left = 256.0
+margin_top = 112.0
 margin_right = 384.0
-margin_bottom = 20.0
+margin_bottom = 132.0
 text = "Debug InstaPlay"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -189,6 +190,36 @@ custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[center]Single Player[/center]"
 text = "Single Player"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonContinue" type="TextureButton" parent="Main"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_right = 64.0
+margin_bottom = 24.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Main/ButtonContinue"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Continue Game[/center]"
+text = "Continue Game"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -487,6 +518,7 @@ __meta__ = {
 }
 
 [node name="Multiplayer" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -939,6 +971,7 @@ text = "Version"
 [connection signal="button_up" from="Main/ButtonSettings" to="." method="_on_ButtonSettings_button_up"]
 [connection signal="button_up" from="Main/ButtonMp" to="." method="_on_ButtonMp_button_up"]
 [connection signal="button_up" from="Main/ButtonPlay" to="." method="_on_ButtonPlay_button_up"]
+[connection signal="button_up" from="Main/ButtonContinue" to="." method="_on_ButtonContinue_button_up"]
 [connection signal="button_up" from="SinglePlayer/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="value_changed" from="SinglePlayer/Custom/SCgDifficulty" to="." method="_on_SCgDifficulty_value_changed"]
 [connection signal="value_changed" from="SinglePlayer/Custom/SCgObstacles" to="." method="_on_SCgObstacles_value_changed"]

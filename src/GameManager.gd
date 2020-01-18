@@ -35,6 +35,7 @@ func stateTransition(to):
 		$gameViewport.hide()
 		$menuViewport.show()
 		$menuViewport/Viewport/Menu.show()
+		$menuViewport/Viewport/Menu.updateGui()
 	elif to == Types.GameStates.Game:
 		$gameViewport.show()
 		$menuViewport.hide()
@@ -51,6 +52,9 @@ func unloadLevel():
 	$gameViewport.get_node("Viewport/LevelHolder").remove_child(levelNode)
 	levelNode.queue_free()
 	levelNode = null
+
+func continueGame():
+	stateTransition(Types.GameStates.Game)
 
 func newGame(gameMode, payLoad = null):
 	if levelNode:

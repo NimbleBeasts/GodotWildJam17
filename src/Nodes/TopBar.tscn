@@ -1,0 +1,106 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/Nodes/TopBar.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/NormalFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/art/bar/over.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/bar/bar.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/bar/under.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/MenuFont.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/art/menuButton/menu3.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/menuButton/menu2.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/menuButton/menu1.png" type="Texture" id=9]
+[ext_resource path="res://assets/art/helpButton/help3.png" type="Texture" id=10]
+[ext_resource path="res://assets/art/helpButton/help1.png" type="Texture" id=11]
+[ext_resource path="res://assets/art/helpButton/help2.png" type="Texture" id=12]
+
+[node name="TopBar" type="Control"]
+anchor_right = 1.0
+margin_bottom = 32.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+color = Color( 0.180392, 0.133333, 0.184314, 1 )
+
+[node name="LGameMode" type="Label" parent="."]
+margin_left = 4.0
+margin_right = 144.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 2 )
+text = "Game Mode Label"
+valign = 1
+
+[node name="LPlayerTurn" type="Label" parent="."]
+margin_left = 192.0
+margin_right = 384.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 2 )
+text = "Player Turn"
+align = 1
+valign = 1
+
+[node name="PbTurns" type="TextureProgress" parent="."]
+anchor_right = 1.0
+margin_top = 16.0
+margin_bottom = 32.0
+max_value = 50.0
+value = 25.0
+texture_under = ExtResource( 5 )
+texture_over = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LTurns" type="Label" parent="."]
+margin_left = 192.0
+margin_top = 16.0
+margin_right = 384.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 6 )
+text = "Turns Left: 10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BMenu" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -20.0
+margin_right = -4.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BHelp" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_top = -1.0
+margin_right = -24.0
+margin_bottom = 16.0
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="BMenu" to="." method="_on_BMenu_button_up"]
+[connection signal="button_up" from="BHelp" to="." method="_on_BHelp_button_up"]
