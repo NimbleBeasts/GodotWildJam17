@@ -32,7 +32,7 @@ func WhatsNearMeOnThe(direction,my_coords):#null when there's no tile or the til
 	var nearbytile_coords = [my_coords[0]+movement[direction][0], my_coords[1]+movement[direction][1]]
 	if AreValidCoords(nearbytile_coords):
 		result = [tilesContent[nearbytile_coords],nearbytile_coords]
-	print('WhatsNearMeOnThe(',direction,',',my_coords,')=',result)
+	#print('WhatsNearMeOnThe(',direction,',',my_coords,')=',result)
 	return result
 	
 func Opposite(direction):
@@ -85,12 +85,12 @@ func AreConnected(tile1,tile2, direction):#direction: tile2's position relative 
 			result = Opposite(direction) in [x2,y2]
 	elif '_' in type1:
 		result = Opposite(direction) in [x2,y2]
-	print('AreConnected(',tile1,',',tile2,',',direction,')=',result)
+	#print('AreConnected(',tile1,',',tile2,',',direction,')=',result)
 	return result
 func IsAPath(type):#whether the tile type can connect two cities
 	var result = false
 	result =  type in [Types.Tile.Rail_UD, Types.Tile.Rail_LR, Types.Tile.Rail_LD, Types.Tile.Rail_RD, Types.Tile.Rail_UL, Types.Tile.Rail_UR, Types.Tile.Rail_ULRD, Types.Tile.Station_UD, Types.Tile.Station_LR]
-	print('IsAPath(',type,')=',result)
+	#print('IsAPath(',type,')=',result)
 	return result
 func PathEnd(tile,pos):
 	var result = null
@@ -100,8 +100,9 @@ func PathEnd(tile,pos):
 		result =  dirs[0]
 	else:
 		pass#TODO: Code for handling the Intersection tile, Park, Generator,and Repair tiles
-	print('PathEnd(',tile,',',pos,')=',result)
+	#print('PathEnd(',tile,',',pos,')=',result)
 	return result
+
 func CheckForConnections():
 	var score = 0
 	for citiesTile in CitiesCoords:
@@ -132,10 +133,11 @@ func CheckForConnections():
 				else: 
 					break
 	CalculateScore()
+
 func AddToPaths(start_pos,dir,type,coords):
 	var path = Paths[[start_pos,dir]]
 	path.append([type,coords])
-	print("AddToPaths(",start_pos,",",type,",",coords)
+	#print("AddToPaths(",start_pos,",",type,",",coords)
 func ClearUselessValues():
 	#clear paths that contain one item or are an inverse path
 	for path_key in Paths.keys():
@@ -197,6 +199,7 @@ func CalculateScore():
 	Anim.append(["PAUSE",2])
 
 	score += bonus
+	#print(score)
 	return score
 
 func getTileWorth(tile,path):

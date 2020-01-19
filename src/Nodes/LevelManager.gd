@@ -25,6 +25,7 @@ var TopCard2 = Types.Tile.Rail_UD
 
 var drng = RandomNumberGenerator.new()
 
+
 func DecideFirstPlayer():
 	randomize()
 	FirstPlayer = (randi() %2)+1
@@ -62,6 +63,8 @@ func NextRound():
 					GameOver()#for SP
 				else:
 					Global.gm.levelNode.NextTurn()
+
+
 
 func InitializeComponents(mode, payLoad):
 	TilesGrid1= Global.gm.levelNode.get_node("Player1/TilesGrid")
@@ -197,6 +200,8 @@ func ShowNextCard():
 			TopCard1 = Deck1[0]
 			DeckNode1.get_node('TopCard').frame = Deck1[0]-3
 
+
+
 func GameOver():
 	var scores1 
 	var scores2 
@@ -205,23 +210,29 @@ func GameOver():
 			TilesGrid1.CheckForConnections()
 			TilesGrid2.CheckForConnections()
 			Global.gm.levelNode.ShowCurrentPlayerUI(1)
-			var done1 = ScoreAnimator.Animate(TilesGrid1)
-			scores1 = ScoreAnimator.result[0].duplicate(true)
+			var done1 = ScoreAnimator.Animate(TilesGrid1, false)
+			scores1 = getScore(TilesGrid1)
+			scores2 = getScore(TilesGrid2)
+			#print(scores2)
 			Global.gm.levelNode.get_node('TopBar').updateGui(64,2)
 			Global.gm.levelNode.ShowCurrentPlayerUI(2)
 			yield(get_tree().create_timer(3), "timeout")
 			
-			var done2 = ScoreAnimator.Animate(TilesGrid2)
-			scores2 = ScoreAnimator.result[1].duplicate(true)
-			yield(get_tree().create_timer(2), "timeout")
+			var done2 = ScoreAnimator.Animate(TilesGrid2, true)
+			
+			#yield(get_tree().create_timer(2), "timeout")
 		_: #for SP
 			TilesGrid1.CheckForConnections()
-			var done = ScoreAnimator.Animate(TilesGrid1)
-			scores1 = ScoreAnimator.result[0].duplicate(true)
-			yield(get_tree().create_timer(2), "timeout")
+			ScoreAnimator.Animate(TilesGrid1, true)
+			scores1 = getScore(TilesGrid1)
 	Global.gm.levelNode.get_node("ScoreBoard").setup(gameMode)
 	Global.gm.levelNode.get_node("ScoreBoard").updateGui(scores1,scores2)
-	Global.gm.levelNode.get_node("ScoreBoard").visible = true
+	
+
+func getScore(grid):
+	return {"rails": grid.SA_Rails, "cities": grid.SA_CitiesFactories, "stations": grid.SA_Stations, "penalty": grid.SA_PenaltyBonus}
+
+
 func GimmeSecondChance():
 	
 	if CurrentPlayer==2:

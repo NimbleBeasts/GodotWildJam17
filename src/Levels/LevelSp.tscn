@@ -31,15 +31,15 @@ custom_constants/hseparation = 0
 
 [node name="Deck" parent="Player1" instance=ExtResource( 5 )]
 margin_left = 480.0
-margin_top = 208.0
+margin_top = 52.0
 margin_right = 480.0
-margin_bottom = 208.0
+margin_bottom = 52.0
 
 [node name="SecondChanceButton" parent="Player1" instance=ExtResource( 6 )]
-margin_left = 556.444
-margin_top = 219.514
-margin_right = 620.444
-margin_bottom = 283.514
+margin_left = 481.0
+margin_top = 161.0
+margin_right = 545.0
+margin_bottom = 193.0
 
 [node name="SuperAntiCheatLayer" type="ColorRect" parent="."]
 visible = false
@@ -57,4 +57,3 @@ margin_bottom = 360.0
 margin_right = 640.0
 
 [node name="ScoreAnimator" parent="." instance=ExtResource( 9 )]
-

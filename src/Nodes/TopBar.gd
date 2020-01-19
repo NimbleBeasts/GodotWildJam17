@@ -32,7 +32,7 @@ func updateGui(turn, player = 0):
 	$PbTurns.value = turn
 	$LTurns.set_text("Turns Left: "+ str(turn))
 	if player > 0:
-		$LPlayerTurn.set_text("Player " + str(player) + "'s Turn'")
+		$LPlayerTurn.set_text("Player " + str(player) + "'s Turn")
 
 
 func _on_BMenu_button_up():

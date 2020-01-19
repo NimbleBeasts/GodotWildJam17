@@ -109,6 +109,7 @@ bbcode_enabled = true
 scroll_active = false
 
 [node name="Sp" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -154,4 +155,3 @@ margin_bottom = 288.0
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 scroll_active = false
-
