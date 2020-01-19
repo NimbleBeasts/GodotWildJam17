@@ -16,6 +16,16 @@ func _ready():
 	_on_ButtonNewSeed_button_up() 
 	dailySeed()
 	$Main/ButtonContinue.hide()
+	
+	# Remove not supported features
+	ShitGameJamsOver()
+
+
+func ShitGameJamsOver():
+	$SinglePlayer/Custom/ButtonTutorial.disabled = true #SOOORRRYY
+	$Multiplayer/CnJoinGame/ButtonJoin.disabled = true
+	$Multiplayer/CnHostGame/ButtonHost.disabled = true
+	
 
 func updateGui():
 	stateTransition(MenuState.Main)
