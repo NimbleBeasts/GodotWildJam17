@@ -12,17 +12,19 @@ func _on_Tile_pressed():
 		card.vframes = Types.TileVframes
 		card.centered = false
 		var gamemode = Global.gm.levelNode.LevelManager.gameMode
+		var LevelManager = Global.gm.levelNode.LevelManager
+		var current_player = LevelManager.CurrentPlayer
+		
 		match gamemode:
 			Types.GameMode.MpLocalGame:
-				var LevelManager = Global.gm.levelNode.LevelManager
-				var current_player = LevelManager.CurrentPlayer
 				tile_type = LevelManager.get('TopCard'+str(current_player))
 				TilesGrid = LevelManager.get('TilesGrid'+str(current_player))
 				TilesGrid.OccupiedTilesCount += 1
 				
-			_:#for test level. TODO: REMOVE IN RELEASE VERSION!
-				tile_type = Global.gm.levelNode.TopCard
-				TilesGrid = Global.gm.levelNode.TilesGrid
+			_: #All SP now
+				tile_type = LevelManager.TopCard1
+				TilesGrid = LevelManager.TilesGrid1
+				TilesGrid.OccupiedTilesCount += 1
 
 		card.frame = tile_type
 		TilesGrid.tilesContent[coords]=tile_type

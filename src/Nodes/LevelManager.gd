@@ -59,8 +59,11 @@ func InitializeComponents(mode, payLoad):#modes: 0=single_player, 1=shared_scree
 	TilesGrid1= Global.gm.levelNode.get_node("Player1/TilesGrid")
 	DeckNode1 = Global.gm.levelNode.get_node('Player1/Deck')
 
+	#Init RNG
+	_initializeRng(payLoad)
+	
 	#Deck Initialization
-	_initializeDeck(payLoad)
+	_initializeDeck()
 	TopCard1 = Deck1[0]
 	
 	#Set Mode
@@ -83,7 +86,7 @@ func InitializeComponents(mode, payLoad):#modes: 0=single_player, 1=shared_scree
 			
 var InitialGrid = {}
 
-func _initializeDeck(payLoad):
+func _initializeRng(payLoad):
 	if payLoad.get("seed") != null:
 		#Use custom seed
 		drng.set_seed(str(payLoad.seed).hash())
@@ -91,6 +94,8 @@ func _initializeDeck(payLoad):
 		#Else Randomize
 		drng.randomize()
 
+func _initializeDeck():
+	randomize()
 	#load a random deck
 	for cardType in Types.Tile.keys():
 		for n in DeckCardsCount[Types.Tile[cardType]]:

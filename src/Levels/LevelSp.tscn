@@ -28,9 +28,9 @@ custom_constants/hseparation = 0
 
 [node name="Deck" parent="Player1" instance=ExtResource( 5 )]
 margin_left = 480.0
-margin_top = 208.0
+margin_top = 52.1609
 margin_right = 480.0
-margin_bottom = 208.0
+margin_bottom = 52.1609
 
 [node name="TopBar" parent="." instance=ExtResource( 6 )]
 margin_right = 640.0

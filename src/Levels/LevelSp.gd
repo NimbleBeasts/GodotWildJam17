@@ -16,3 +16,5 @@ func setup(gameMode, payLoad):
 	totalTurns = 64 - $Player1/TilesGrid.OccupiedTilesCount
 
 	$TopBar.setup(gameMode, payLoad, totalTurns)
+
+	$Player1/Deck.get_node('TopCard').frame = LevelManager.TopCard1 - 3
