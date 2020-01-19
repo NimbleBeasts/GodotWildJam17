@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/menu/bg.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/art/menu/tinyButton/pressedButton.png" type="Texture" id=10]
 [ext_resource path="res://assets/art/menu/tinyButton/activeButton.png" type="Texture" id=11]
 [ext_resource path="res://assets/art/menu/tinyButton/hoverButton.png" type="Texture" id=12]
+[ext_resource path="res://assets/sounds/buttonClick.wav" type="AudioStream" id=13]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -807,7 +808,6 @@ __meta__ = {
 }
 
 [node name="Settings" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -824,9 +824,9 @@ color = Color( 0.282353, 0.290196, 0.466667, 1 )
 [node name="ButtonFullscreen" type="TextureButton" parent="Settings"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_top = 208.0
+margin_top = 168.0
 margin_right = 128.0
-margin_bottom = 232.0
+margin_bottom = 192.0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 4 )
@@ -847,6 +847,66 @@ custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[center]Fullscreen: On[/center]"
 text = "Fullscreen: On"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonMusic" type="TextureButton" parent="Settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 216.0
+margin_right = 128.0
+margin_bottom = 240.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Settings/ButtonMusic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Music: On[/center]"
+text = "Music: On"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ButtonSound" type="TextureButton" parent="Settings"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 264.0
+margin_right = 128.0
+margin_bottom = 288.0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 5 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Settings/ButtonSound"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 4.0
+margin_right = -16.0
+margin_bottom = -4.0
+mouse_filter = 1
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center]Sound: On[/center]"
+text = "Sound: On"
 __meta__ = {
 "_edit_lock_": true
 }
@@ -881,13 +941,6 @@ text = "Back"
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="Label" type="Label" parent="Settings"]
-margin_left = 200.0
-margin_top = 152.0
-margin_right = 280.0
-margin_bottom = 176.0
-text = "Do we need settings?"
 
 [node name="Credits" type="Control" parent="."]
 visible = false
@@ -965,6 +1018,11 @@ custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[right]Version[/right]"
 text = "Version"
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 320, 192 )
+stream = ExtResource( 13 )
+bus = "Sounds"
 [connection signal="button_up" from="Main/BtnDbg" to="." method="_on_BtnDbg_button_up"]
 [connection signal="button_up" from="Main/ButtonExit" to="." method="_on_ButtonExit_button_up"]
 [connection signal="button_up" from="Main/ButtonCredits" to="." method="_on_ButtonCredits_button_up"]
@@ -986,5 +1044,7 @@ text = "Version"
 [connection signal="button_up" from="Multiplayer/CnHostGame/ButtonLocal" to="." method="_on_ButtonLocal_button_up"]
 [connection signal="button_up" from="Multiplayer/CnHostGame/ButtonHost" to="." method="_on_ButtonHost_button_up"]
 [connection signal="button_up" from="Settings/ButtonFullscreen" to="." method="_on_ButtonFullscreen_button_up"]
+[connection signal="button_up" from="Settings/ButtonMusic" to="." method="_on_ButtonMusic_button_up"]
+[connection signal="button_up" from="Settings/ButtonSound" to="." method="_on_ButtonSound_button_up"]
 [connection signal="button_up" from="Settings/ButtonBack" to="." method="_on_ButtonBack_button_up"]
 [connection signal="button_up" from="Credits/ButtonBack" to="." method="_on_ButtonBack_button_up"]

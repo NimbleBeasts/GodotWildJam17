@@ -70,6 +70,15 @@ func updateSettings():
 	else:
 		$Settings/ButtonFullscreen/Text.bbcode_text = "[center]Fullscreen: Off[/center]"
 
+	if Global.userConfig.music:
+		$Settings/ButtonMusic/Text.bbcode_text = "[center]Music: On[/center]"
+	else:
+		$Settings/ButtonMusic/Text.bbcode_text = "[center]Music: Off[/center]"
+
+	if Global.userConfig.sound:
+		$Settings/ButtonSound/Text.bbcode_text = "[center]Sound: On[/center]"
+	else:
+		$Settings/ButtonSound/Text.bbcode_text = "[center]Sound: Off[/center]"
 
 func trim(string):
 	var retVal = string.lstrip(" ")
@@ -78,52 +87,78 @@ func trim(string):
 
 func _on_ButtonExit_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		print("Ok, Bye! Thanks for playing.")
 		get_tree().quit()
 
 func _on_ButtonSettings_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		stateTransition(MenuState.Settings)
 
 func _on_ButtonPlay_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		stateTransition(MenuState.Singleplayer)
 
 
 func _on_ButtonBack_button_up():
+	_playClick()
 	stateTransition(MenuState.Main)
 
 func _on_ButtonLights_button_up():
+	_playClick()
 	var lights = Global.getGameManager().getLights()
 	Global.getGameManager().setLights(!lights)
 	updateSettings()
 
 func _on_ButtonFullscreen_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		Global.fullscreen()
 		updateSettings()
 
+
+func _on_ButtonMusic_button_up():
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
+		Global.musicToggle()
+		updateSettings()
+
+
+func _on_ButtonSound_button_up():
+	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
+		Global.soundToggle()
+		updateSettings()
+		
+	
 func _on_BtnDbg_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		Global.getGameManager().newGame(Types.GameMode.DailyChallenge)
 
 func _on_ButtonCredits_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		stateTransition(MenuState.Credits)
 
 
 func _on_ButtonMp_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		stateTransition(MenuState.Multiplayer)
 
 func _on_ButtonContinue_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		Global.getGameManager().continueGame()
 
 
 # Multiplayer Related
 func _on_ButtonLocal_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		var cities = $Multiplayer/CnHostGame/SDifficulty.value
 		var obstacles = $Multiplayer/CnHostGame/SObstacles.value
 		Global.getGameManager().newGame(Types.GameMode.MpLocalGame, {"cities": cities, "obstacles": obstacles})
@@ -131,6 +166,7 @@ func _on_ButtonLocal_button_up():
 
 func _on_ButtonHost_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		var port = int($Multiplayer/CnHostGame/TePort.text)
 		var cities = $Multiplayer/CnHostGame/SDifficulty.value
 		var obstacles = $Multiplayer/CnHostGame/SObstacles.value
@@ -139,6 +175,7 @@ func _on_ButtonHost_button_up():
 
 func _on_ButtonJoin_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		var rawIpText = $Multiplayer/CnJoinGame/TeIp.text
 		var ipData = rawIpText.rsplit(":")
 		
@@ -159,21 +196,25 @@ func _on_ButtonJoin_button_up():
 # Singleplayer Related
 func _on_ButtonCustom_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		var difficulty = $SinglePlayer/Custom/SCgDifficulty.value
 		var obstacles = $SinglePlayer/Custom/SCgObstacles.value
 		var tSeed = int($SinglePlayer/Custom/TeSeed.text)
 		Global.getGameManager().newGame(Types.GameMode.CustomGame, {"cities": difficulty, "obstacles": obstacles, "seed": tSeed})
 
 func _on_ButtonNewSeed_button_up():
+	_playClick()
 	$SinglePlayer/Custom/TeSeed.text = str(generateSeed())
 
 func _on_ButtonDaily_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		dailySeed() #Reseed the rng
 		Global.getGameManager().newGame(Types.GameMode.DailyChallenge, {"seed": dailyChallengeSeed})
 
 func _on_ButtonTutorial_button_up():
 	if Global.getGameManager().state == Types.GameStates.Menu:
+		_playClick()
 		Global.getGameManager().newGame(Types.GameMode.Tutorial)
 
 
@@ -190,5 +231,9 @@ func _on_SCgObstacles_value_changed(value):
 
 func _on_SObstacles_value_changed(value):
 	$Multiplayer/CnHostGame/LabelObstaclesCount.set_text(str(int(value)))
+
+func _playClick():
+	if Global.userConfig.sound:
+		$ClickSound.play()
 
 

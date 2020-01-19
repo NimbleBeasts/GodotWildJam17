@@ -36,8 +36,10 @@ func updateGui(turn, player = 0):
 
 
 func _on_BMenu_button_up():
+	Global.menu._playClick()
 	Global.gm.stateTransition(Types.GameStates.Menu)
 
 
 func _on_BHelp_button_up():
+	Global.menu._playClick()
 	OS.shell_open("https://github.com/NimbleBeasts/GodotWildJam17/wiki")

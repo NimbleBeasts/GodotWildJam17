@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Menu/Menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/art/menu/nbSplash.png" type="Texture" id=3]
+[ext_resource path="res://assets/sounds/RailNWrite_bgm.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "start"
@@ -92,3 +93,8 @@ __meta__ = {
 autoplay = "start"
 anims/start = SubResource( 1 )
 
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 240, 140 )
+stream = ExtResource( 4 )
+bus = "Music"
+[connection signal="finished" from="MusicPlayer" to="." method="_on_MusicPlayer_finished" flags=3]

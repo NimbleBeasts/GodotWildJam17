@@ -29,7 +29,9 @@ const NbConfig = {
 # User Config
 var userConfig = {
 	"highscore": 0,
-	"fullscreen": false
+	"fullscreen": false,
+	"music": true,
+	"sound": true
 }
 
 # GameMasterNode
@@ -77,6 +79,8 @@ func loadConfig():
 	var data = parse_json(cfgFile.get_line())
 	userConfig.highscore = data.highscore
 	userConfig.fullscreen = data.fullscreen
+	userConfig.music = data.music
+	userConfig.sound = data.sound
 	# When stuck here, the config attributes have been changed.
 	# Delete the Config.cfg to solve this issue.
 	# Project->Open Project Data Folder-> Config.cfg
@@ -102,6 +106,18 @@ func fullscreen(set = null):
 	else:
 		videoSetup(3)
 		OS.window_fullscreen = true
+
+func musicToggle():
+	userConfig.music = !userConfig.music
+	saveConfig()
+	if userConfig.music:
+		gm.startMusic()
+	else:
+		gm.stopMusic()
+
+func soundToggle():
+	userConfig.sound = !userConfig.sound
+	saveConfig()
 
 # PRNG
 func prng():
