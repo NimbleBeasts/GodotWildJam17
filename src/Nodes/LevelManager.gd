@@ -49,26 +49,24 @@ func NextPlayer():
 				Global.gm.levelNode.ShowCurrentPlayerUI(CurrentPlayer)
 
 func NextRound():
-	if TilesGrid1.OccupiedTilesCount==GridDimensions*GridDimensions and TilesGrid2.OccupiedTilesCount==GridDimensions*GridDimensions:#gameover
 		match gameMode:
 			Types.GameMode.MpLocalGame:
-				GameOver()#TODO: work on these
-				GameOver()
+				if TilesGrid1.OccupiedTilesCount==GridDimensions*GridDimensions and TilesGrid2.OccupiedTilesCount==GridDimensions*GridDimensions:#gameover
+					GameOver()
+				else:
+					TurnsCount = 0
+					CurrentPlayer = int(CurrentPlayer==1) + 1
+					Global.gm.levelNode.ShowCurrentPlayerUI(CurrentPlayer)
 			_:
-				GameOver()#for SP
-	else:
-		TurnsCount = 0
-		CurrentPlayer = int(CurrentPlayer==1) + 1
-		match gameMode:
-			Types.GameMode.MpLocalGame:
-				Global.gm.levelNode.ShowCurrentPlayerUI(CurrentPlayer)
-			_:
-				Global.gm.levelNode.NextTurn()
+				if TilesGrid1.OccupiedTilesCount==GridDimensions*GridDimensions:
+					GameOver()#for SP
+				else:
+					Global.gm.levelNode.NextTurn()
 
-func InitializeComponents(mode, payLoad):#modes: 0=single_player, 1=shared_screen_multi, 2=network_multi
+func InitializeComponents(mode, payLoad):
 	TilesGrid1= Global.gm.levelNode.get_node("Player1/TilesGrid")
 	DeckNode1 = Global.gm.levelNode.get_node('Player1/Deck')
-
+	DeckNode1.get_node('TopCard').frame = TopCard1-3
 	#Init RNG
 	_initializeRng(payLoad)
 	
@@ -91,6 +89,7 @@ func InitializeComponents(mode, payLoad):#modes: 0=single_player, 1=shared_scree
 			Deck2 = Deck1.duplicate(true)
 			TopCard2 = Deck2[0]
 			DeckNode2 = Global.gm.levelNode.get_node('Player2/Deck')
+			DeckNode2.get_node('TopCard').frame = TopCard2-3
 		_:
 			print("Error: Unhandled Component")
 			
@@ -144,6 +143,7 @@ func InitializeTiles():
 		var type = Types.Tile.Buildings
 		var coords = FreeTiles.keys()[drng.randi() % FreeTiles.keys().size()]
 		InitialGrid[coords] = type
+		
 		FreeTiles.erase(coords)
 		
 	for n in range(Types.FactoriesCount):
@@ -162,6 +162,7 @@ func InitializeGrid(grid):
 			tile.coords = [i,j]
 			grid.add_child(tile)
 			grid.tilesContent[tile.coords]=null
+func FillGrid(grid):
 	#load the initial tiles
 	var obstacleScene = load("res://src/Nodes/tiles/Obstacle.tscn")
 	for coords in InitialGrid.keys():
@@ -173,9 +174,12 @@ func InitializeGrid(grid):
 			grid.get_child(grid.CoordsToIndex(coords)).add_child(obstacle)
 		
 	grid.tilesContent = InitialGrid.duplicate(true)
-
+	for coords in InitialGrid.keys():
+		if InitialGrid[coords] == Types.Tile.Buildings:
+			grid.CitiesCoords.append(coords)
 func ShowNextCard():
-	var player = int(CurrentPlayer==1) + 1#because ShowNextCard() is called after NextPlayer() in Tile.gd
+	var player = CurrentPlayer
+	#var player = int(CurrentPlayer==1) + 1#because ShowNextCard() is called after NextPlayer() in Tile.gd
 	match gameMode:
 		Types.GameMode.MpLocalGame:
 			var deck
@@ -198,9 +202,10 @@ func GameOver():
 		Types.GameMode.MpLocalGame:
 			TilesGrid1.CheckForConnections()
 			TilesGrid2.CheckForConnections()
-			
+			Global.gm.levelNode.ShowCurrentPlayerUI(1)
 			var done = ScoreAnimator.Animate(TilesGrid1)
 			Global.gm.levelNode.get_node('TopBar').updateGui(64,2)
+			Global.gm.levelNode.ShowCurrentPlayerUI(2)
 			yield(get_tree().create_timer(3), "timeout")
 			
 			ScoreAnimator.Animate(TilesGrid2)

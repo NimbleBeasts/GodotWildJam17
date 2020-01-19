@@ -91,3 +91,4 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BootSplash"]
 autoplay = "start"
 anims/start = SubResource( 1 )
+

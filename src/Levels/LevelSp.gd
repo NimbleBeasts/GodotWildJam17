@@ -11,8 +11,10 @@ func setup(gameMode, payLoad):
 	self.payLoad = payLoad
 
 	LevelManager.InitializeComponents(self.gameMode, self.payLoad)
-	LevelManager.InitializeTiles()
 	LevelManager.InitializeGrid($Player1/TilesGrid)
+	LevelManager.InitializeTiles()
+	LevelManager.FillGrid($Player1/TilesGrid)
+
 	totalTurns = 64 - $Player1/TilesGrid.OccupiedTilesCount
 
 	$TopBar.setup(gameMode, payLoad, totalTurns)

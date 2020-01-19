@@ -2,27 +2,24 @@
 
 [ext_resource path="res://src/Levels/LevelMp.gd" type="Script" id=1]
 [ext_resource path="res://src/Nodes/LevelManager.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Nodes/ScoreAnimator.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/art/tableTopMp.png" type="Texture" id=4]
-[ext_resource path="res://src/Nodes/TilesGrid.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Nodes/Deck.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Nodes/TopBar.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/art/tableTopMp.png" type="Texture" id=3]
+[ext_resource path="res://src/Nodes/TilesGrid.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Nodes/Deck.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Nodes/TopBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Nodes/ScoreAnimator.tscn" type="PackedScene" id=7]
 
 [node name="LevelMp" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="LevelManager" parent="." instance=ExtResource( 2 )]
 
-[node name="ScoreAnimator" parent="." instance=ExtResource( 3 )]
-
 [node name="BgMp" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 centered = false
 
 [node name="Player1" type="Node2D" parent="."]
 
-[node name="TilesGrid" parent="Player1" instance=ExtResource( 5 )]
+[node name="TilesGrid" parent="Player1" instance=ExtResource( 4 )]
 margin_left = 48.0
 margin_top = 48.0
 margin_right = 48.0
@@ -30,7 +27,7 @@ margin_bottom = 48.0
 custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 
-[node name="Deck" parent="Player1" instance=ExtResource( 6 )]
+[node name="Deck" parent="Player1" instance=ExtResource( 5 )]
 margin_left = 350.0
 margin_top = 160.0
 margin_right = 350.0
@@ -38,7 +35,7 @@ margin_bottom = 160.0
 
 [node name="Player2" type="Node2D" parent="."]
 
-[node name="TilesGrid" parent="Player2" instance=ExtResource( 5 )]
+[node name="TilesGrid" parent="Player2" instance=ExtResource( 4 )]
 margin_left = 48.0
 margin_top = 48.0
 margin_right = 48.0
@@ -46,7 +43,7 @@ margin_bottom = 48.0
 custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 
-[node name="Deck" parent="Player2" instance=ExtResource( 6 )]
+[node name="Deck" parent="Player2" instance=ExtResource( 5 )]
 margin_left = 350.0
 margin_top = 160.0
 margin_right = 350.0
@@ -67,7 +64,9 @@ visible = false
 rect_min_size = Vector2( 1000, 1000 )
 color = Color( 1, 1, 1, 0 )
 
-[node name="TopBar" parent="." instance=ExtResource( 7 )]
+[node name="TopBar" parent="." instance=ExtResource( 6 )]
 margin_right = 640.0
+
+[node name="ScoreAnimator" parent="." instance=ExtResource( 7 )]
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

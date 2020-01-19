@@ -117,9 +117,6 @@ func CheckForConnections():
 						dir = PathEnd(nearbyTile[0],dir)
 					AddToPaths(citiesTile,init_dir,nearbyTile[0],nearbyTile[1])
 					railsCount+=1
-					print('+1')
-					var testcolors = [Color.blue,Color.rebeccapurple,Color.red,Color.cornflower,Color.blue,Color.rebeccapurple,Color.red,Color.cornflower,Color.blue,Color.rebeccapurple,Color.red,Color.cornflower,Color.blue,Color.rebeccapurple,Color.red,Color.cornflower]
-					get_child(CoordsToIndex(nearbyTile[1])).modulate = testcolors[CitiesCoords.find(citiesTile)]
 					
 					var step_data = nearbyTile.duplicate(true)
 					curr_tile_type = step_data[0]
@@ -160,17 +157,17 @@ func getSpecialTilesBonus():
 				tile_bonus += int(nearbytile==Types.Tile.Buildings)*Types.ScoreCoef["PowerPlantCityBonus"]+int(nearbytile==Types.Tile.Factory)*Types.ScoreCoef["PowerPlantFactoryBonus"]
 			if !requirement_fullfilled: tile_bonus=Types.ScoreCoef["LonelyPowerPlant"]
 		bonus += tile_bonus
-		Anim.append([tile[1],bonus])
+		Anim.append([tile[1],tile_bonus])
 	
 	for station in DisconnectedStations:
 		bonus += Types.ScoreCoef["LonelyStation"]
-		Anim.append([station[1],bonus])
+		Anim.append([station[1],Types.ScoreCoef["LonelyStation"]])
 	return bonus
 
 func CalculateScore():
 	var score = 0
 	ClearUselessValues()
-
+	var bonus = getSpecialTilesBonus()
 	for path_data in Paths.keys():
 		var path_score = 0
 		var station_bonus_active = false
@@ -186,7 +183,7 @@ func CalculateScore():
 		Anim.append(["PAUSE",1])
 	
 	Anim.append(["PAUSE",2])
-	var bonus = getSpecialTilesBonus()
+
 	score += bonus
 	return score
 
@@ -211,5 +208,5 @@ func getTileWorth(tile,path):
 					TileWorth = Types.ScoreCoef["Station"]
 				else:
 					TileWorth = Types.ScoreCoef["Rail"]
-	print("getTileWorth(",tile,",",path,")=",TileWorth)
+	#print("getTileWorth(",tile,",",path,")=",TileWorth)
 	return TileWorth
