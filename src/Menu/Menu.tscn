@@ -999,7 +999,7 @@ margin_bottom = 264.0
 custom_fonts/normal_font = ExtResource( 8 )
 bbcode_enabled = true
 bbcode_text = "Made by the NimbleBeasts Collective Community for the Godot Wild Jam #17.
-Make sure you don't miss one of our games and follow us on    [color=#9d303b]¥[/color][color=#f5edba]Itch.io[/color], [color=#c0c741]®[/color]GameJolt, [color=#34859d]`[/color]Twitter or join our Discord Server.
+Make sure you don't miss one of our games and follow us on    [color=#9d303b]¥[/color]Itch.io, [color=#c0c741]®[/color]GameJolt, [color=#34859d]`[/color]Twitter or join our Discord Server.
 
 "
 text = "Made by the NimbleBeasts Collective Community for the Godot Wild Jam #17.
