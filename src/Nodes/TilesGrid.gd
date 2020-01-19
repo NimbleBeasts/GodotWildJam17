@@ -7,6 +7,7 @@ var DisconnectedStations = []#[[type, coords]]
 var Connections = []#contains coords for starting city tile and the destination city tile for each connection (that is 2 cities)
 var Paths = {}# {start_pos:path}
 var score = 0
+var Anim = []#array used for displaying tile bonus one by one
 func IsTileEmpty(tile):
 	return tilesContent[tile]==null
 
@@ -159,32 +160,36 @@ func getSpecialTilesBonus():
 				tile_bonus += int(nearbytile==Types.Tile.Buildings)*Types.ScoreCoef["PowerPlantCityBonus"]+int(nearbytile==Types.Tile.Factory)*Types.ScoreCoef["PowerPlantFactoryBonus"]
 			if !requirement_fullfilled: tile_bonus=Types.ScoreCoef["LonelyPowerPlant"]
 		bonus += tile_bonus
+		Anim.append([tile[1],bonus])
+	
 	for station in DisconnectedStations:
 		bonus += Types.ScoreCoef["LonelyStation"]
+		Anim.append([station[1],bonus])
 	return bonus
 
 func CalculateScore():
 	var score = 0
 	ClearUselessValues()
-	var bonus = getSpecialTilesBonus()
-	print('bonus:', bonus)
+
 	for path_data in Paths.keys():
 		var path_score = 0
 		var station_bonus_active = false
 		var path = Paths[path_data]
 		for tile in path:
 			var value = getTileWorth(tile,path)
+			Anim.append([tile[1],value])
 			path_score+=value
 			if !station_bonus_active and (tile[0] in [Types.Tile.Station_UD, Types.Tile.Station_LR]):station_bonus_active = true
 		if station_bonus_active: path_score *=2
-		
 		score+=path_score
+		
+		Anim.append(["PAUSE",1])
+	
+	Anim.append(["PAUSE",2])
+	var bonus = getSpecialTilesBonus()
 	score += bonus
-	OS.alert(str(score))
-	print("_____________________")
-	for path in Paths.keys():
-		print(path,'||||',Paths[path])
-		print("_____________________")
+	return score
+
 func getTileWorth(tile,path):
 	var TileWorth = 0
 	var type = tile[0]

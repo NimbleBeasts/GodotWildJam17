@@ -38,4 +38,5 @@ func _on_Tile_pressed():
 				Global.gm.levelNode.LevelManager.NextPlayer()
 				Global.gm.levelNode.LevelManager.ShowNextCard()
 			_:
+				Global.gm.levelNode.LevelManager.NextRound()
 				Global.gm.levelNode.LevelManager.ShowNextCard()

@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var ScoreAnimator = Global.gm.levelNode.get_node("ScoreAnimator")
+
 # Gameplay Data
 export var GridDimensions = 8 # x=y=GridDimensions
 var ObstaclesCount = 16 # when game starts
@@ -9,6 +11,7 @@ const DeckCardsCount = [0,0,0,0,8,8,6,6,6,6,2,2,2,2,2,4]
 
 # Data
 var gameMode = null
+var FirstPlayer = -1
 var CurrentPlayer = -1
 var TurnsCount =0#TurnsCount is for tracking who played their turn each round.
 var TilesGrid1#for player1
@@ -24,7 +27,8 @@ var drng = RandomNumberGenerator.new()
 
 func DecideFirstPlayer():
 	randomize()
-	CurrentPlayer = (randi() %2)+1
+	FirstPlayer = (randi() %2)+1
+	CurrentPlayer = FirstPlayer
 
 func NextPlayer():
 	#To prevent player from clicking more than once.
@@ -46,14 +50,20 @@ func NextPlayer():
 
 func NextRound():
 	if TilesGrid1.OccupiedTilesCount==GridDimensions*GridDimensions and TilesGrid2.OccupiedTilesCount==GridDimensions*GridDimensions:#gameover
-		GameOver(1)#TODO: work on these
-		GameOver(2)
+		match gameMode:
+			Types.GameMode.MpLocalGame:
+				GameOver()#TODO: work on these
+				GameOver()
+			_:
+				GameOver()#for SP
 	else:
 		TurnsCount = 0
 		CurrentPlayer = int(CurrentPlayer==1) + 1
 		match gameMode:
 			Types.GameMode.MpLocalGame:
 				Global.gm.levelNode.ShowCurrentPlayerUI(CurrentPlayer)
+			_:
+				Global.gm.levelNode.NextTurn()
 
 func InitializeComponents(mode, payLoad):#modes: 0=single_player, 1=shared_screen_multi, 2=network_multi
 	TilesGrid1= Global.gm.levelNode.get_node("Player1/TilesGrid")
@@ -183,6 +193,16 @@ func ShowNextCard():
 			TopCard1 = Deck1[0]
 			DeckNode1.get_node('TopCard').frame = Deck1[0]-3
 
-func GameOver(player):
-	if player == 1: TilesGrid1.CheckForConnections()
-	elif player == 2: TilesGrid2.CheckForConnections()
+func GameOver():
+	match gameMode:
+		Types.GameMode.MpLocalGame:
+			TilesGrid1.CheckForConnections()
+			TilesGrid2.CheckForConnections()
+			
+			var done = ScoreAnimator.Animate(TilesGrid1)
+			Global.gm.levelNode.get_node('TopBar').updateGui(64,2)
+			yield(get_tree().create_timer(3), "timeout")
+			
+			ScoreAnimator.Animate(TilesGrid2)
+		_: #for SP
+			pass

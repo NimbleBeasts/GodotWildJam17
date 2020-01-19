@@ -24,12 +24,15 @@ func updateGui():
 		$Main/ButtonContinue.hide()
 
 func dailySeed():
-	var date = OS.get_date()
-	var seedString = "" + str(date.day) + str(date.month) + str(date.year)
-	dailyRng = RandomNumberGenerator.new() #Reset it each time
-	dailyRng.set_seed(seedString.hash())
-	dailyChallengeSeed = dailyRng.randi_range(0, 99999)
-
+    var date = OS.get_date()
+    var seedString = "" + str(date.day) + str(date.month) + str(date.year)
+    dailyRng = RandomNumberGenerator.new() #Reset it each time
+    dailyRng.set_seed(seedString.hash())
+    dailyChallengeSeed = dailyRng.randi_range(0, 99999)
+    print(seedString)
+    print(seedString.hash())
+    print(dailyChallengeSeed)
+	
 func generateSeed():
 	return prng.randi_range(0, 99999)
 

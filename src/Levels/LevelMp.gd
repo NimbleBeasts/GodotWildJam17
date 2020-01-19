@@ -1,16 +1,21 @@
 extends Node2D
-
+var gameMode = null
+var payLoad = null
+var totalTurns = 0
 onready var LevelManager = $LevelManager
-func setup(payload):#no need for this in local multi, for now...
-	pass
-func _ready():
+func setup(gameMode, payload):
+	self.gameMode = gameMode
+	self.payLoad = payLoad
+
 	LevelManager.DecideFirstPlayer()
-	LevelManager.InitializeComponents(Types.GameMode.MpLocalGame)
+	LevelManager.InitializeComponents(gameMode,payload)
 	LevelManager.InitializeTiles()
 	LevelManager.InitializeGrid($Player1/TilesGrid)
 	LevelManager.InitializeGrid($Player2/TilesGrid)
-
+	totalTurns = 64 - $Player1/TilesGrid.OccupiedTilesCount
 	ShowCurrentPlayerUI(LevelManager.CurrentPlayer)
+	$TopBar.setup(gameMode, payLoad, totalTurns)
+
 func InitializeUI():
 	var first_card1 = LevelManager.TopCard1
 	var first_card2 = LevelManager.TopCard2
@@ -20,4 +25,5 @@ func ShowCurrentPlayerUI(player):
 	var Opponent = 1 if player==2 else 2
 	get_node('Player'+str(player)).visible = true
 	get_node('Player'+str(Opponent)).visible = false
+	$TopBar.updateGui(64 - $Player1/TilesGrid.OccupiedTilesCount,player)
 	#TODO: Add a Label to display current player. Set Its text value to str(LevelManager.CurrentPlayer)
