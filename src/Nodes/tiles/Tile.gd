@@ -11,7 +11,7 @@ func _on_Tile_pressed():
 		card.hframes = Types.TileHframes
 		card.vframes = Types.TileVframes
 		card.centered = false
-		var gamemode = Global.gm.levelNode.LevelManager.gamemode
+		var gamemode = Global.gm.levelNode.LevelManager.gameMode
 		match gamemode:
 			Types.GameMode.MpLocalGame:
 				var LevelManager = Global.gm.levelNode.LevelManager

@@ -1,16 +1,18 @@
 extends Node2D
 
+onready var LevelManager = $LevelManager
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var totalTurns = -1
+var gameMode = null
+var payLoad = null
 
+func setup(gameMode, payLoad):
+	self.gameMode = gameMode
+	self.payLoad = payLoad
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+	LevelManager.InitializeComponents(self.gameMode, self.payLoad)
+	LevelManager.InitializeTiles()
+	LevelManager.InitializeGrid($Player1/TilesGrid)
+	totalTurns = 64 - $Player1/TilesGrid.OccupiedTilesCount
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	$TopBar.setup(gameMode, payLoad, totalTurns)

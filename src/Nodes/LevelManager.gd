@@ -1,12 +1,14 @@
 extends Node2D
 
+# Gameplay Data
 export var GridDimensions = 8 # x=y=GridDimensions
 var ObstaclesCount = 16 # when game starts
 var CitiesCount = 4
 const FactoriesCount = 2
 const DeckCardsCount = [0,0,0,0,8,8,6,6,6,6,2,2,2,2,2,4]
-export(Types.GameMode) var gamemode
 
+# Data
+var gameMode = null
 var CurrentPlayer = -1
 var TurnsCount =0#TurnsCount is for tracking who played their turn each round.
 var TilesGrid1#for player1
@@ -18,9 +20,12 @@ var DeckNode2
 var TopCard1 = Types.Tile.Rail_UD
 var TopCard2 = Types.Tile.Rail_UD
 
+var drng = RandomNumberGenerator.new()
+
 func DecideFirstPlayer():
 	randomize()
 	CurrentPlayer = (randi() %2)+1
+
 func NextPlayer():
 	#To prevent player from clicking more than once.
 	#If you have a better way to do this, please use it :p
@@ -35,9 +40,10 @@ func NextPlayer():
 		NextRound()
 	else:
 		CurrentPlayer = int(CurrentPlayer==1) + 1
-		match gamemode:
+		match gameMode:
 			Types.GameMode.MpLocalGame:
 				Global.gm.levelNode.ShowCurrentPlayerUI(CurrentPlayer)
+
 func NextRound():
 	if TilesGrid1.OccupiedTilesCount==GridDimensions*GridDimensions and TilesGrid2.OccupiedTilesCount==GridDimensions*GridDimensions:#gameover
 		GameOver(1)#TODO: work on these
@@ -45,30 +51,53 @@ func NextRound():
 	else:
 		TurnsCount = 0
 		CurrentPlayer = int(CurrentPlayer==1) + 1
-		match gamemode:
+		match gameMode:
 			Types.GameMode.MpLocalGame:
 				Global.gm.levelNode.ShowCurrentPlayerUI(CurrentPlayer)
-func InitializeComponents(mode):#modes: 0=single_player, 1=shared_screen_multi, 2=network_multi
-	match gamemode:
+
+func InitializeComponents(mode, payLoad):#modes: 0=single_player, 1=shared_screen_multi, 2=network_multi
+	TilesGrid1= Global.gm.levelNode.get_node("Player1/TilesGrid")
+	DeckNode1 = Global.gm.levelNode.get_node('Player1/Deck')
+
+	#Deck Initialization
+	_initializeDeck(payLoad)
+	TopCard1 = Deck1[0]
+	
+	#Set Mode
+	gameMode = mode
+
+	match gameMode:
+		Types.GameMode.DailyChallenge:
+			CurrentPlayer = 0
+		Types.GameMode.CustomGame:
+			CurrentPlayer = 0
+			ObstaclesCount = payLoad.obstacles
+			CitiesCount = payLoad.cities
 		Types.GameMode.MpLocalGame:
-			TilesGrid1= Global.gm.levelNode.get_node("Player1/TilesGrid")
 			TilesGrid2= Global.gm.levelNode.get_node("Player2/TilesGrid")
-			#load a random deck
-			for cardType in Types.Tile.keys():
-				for n in DeckCardsCount[Types.Tile[cardType]]:
-					Deck1.append(Types.Tile[cardType])
-			randomize()
-			Deck1.shuffle()
 			Deck2 = Deck1.duplicate(true)
-			TopCard1 = Deck1[0]
 			TopCard2 = Deck2[0]
-			DeckNode1 = Global.gm.levelNode.get_node('Player1/Deck')
 			DeckNode2 = Global.gm.levelNode.get_node('Player2/Deck')
-			
+		_:
+			print("Error: Unhandled Component")
 			
 var InitialGrid = {}
 
-func WhatsNearMeOnThe(direction,my_coord,where):#null when there's no tile or the tile is empty
+func _initializeDeck(payLoad):
+	if payLoad.get("seed") != null:
+		#Use custom seed
+		drng.set_seed(str(payLoad.seed).hash())
+	else:
+		#Else Randomize
+		drng.randomize()
+
+	#load a random deck
+	for cardType in Types.Tile.keys():
+		for n in DeckCardsCount[Types.Tile[cardType]]:
+			Deck1.append(Types.Tile[cardType])
+	Deck1.shuffle()
+
+func WhatsNearMeOnThe(direction,my_coords,where):#null when there's no tile or the tile is empty
 	var result = [null,null]
 	var movement = [[0,-1], [-1,0], [1,0], [0,1]] #which coordinate (x or y) to change to move in the direction
 	var coords = [my_coords[0]+movement[direction][0], my_coords[1]+movement[direction][1]]
@@ -82,33 +111,32 @@ func InitializeTiles():
 		for i in range(GridDimensions):
 			InitialGrid[[i,j]] =null
 	FreeTiles = InitialGrid.duplicate(true)
-	randomize()
 	
 	for i in range(ObstaclesCount):
-		var type = [ Types.Tile.Mountains, Types.Tile.Forest][randi() % 2]
-		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		var type = [ Types.Tile.Mountains, Types.Tile.Forest][drng.randi() % 2]
+		var coords = FreeTiles.keys()[drng.randi() % FreeTiles.keys().size()]
 		InitialGrid[coords] = type
 		FreeTiles.erase(coords)
 
 	var quadrants = [{},{},{},{}]
 	for limits in [[[0,0],[3,3]],[[4,0],[7,3]],[[0,4],[3,7]],[[4,4],[7,7]]]:
 		for i in range(4):
-			var limit = limits[i]
-			for y in range(limit[0][1],limit[1][1]+1):
-				for x in range(limit[0][0],limit[1][0]+1):
+			for y in range(limits[0][1],limits[1][1]+1):
+				for x in range(limits[0][0],limits[1][0]+1):
 					quadrants[i][[x,y]] = null
 	#remove occupied tiles  from quadrants
 	for n in range(CitiesCount):
 		var type = Types.Tile.Buildings
-		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		var coords = FreeTiles.keys()[drng.randi() % FreeTiles.keys().size()]
 		InitialGrid[coords] = type
 		FreeTiles.erase(coords)
 		
 	for n in range(Types.FactoriesCount):
 		var type = Types.Tile.Factory
-		var coords = FreeTiles.keys()[randi() % FreeTiles.keys().size()]
+		var coords = FreeTiles.keys()[drng.randi() % FreeTiles.keys().size()]
 		InitialGrid[coords] = type
 		FreeTiles.erase(coords)
+
 func InitializeGrid(grid):
 	#load the grid
 	grid.columns = GridDimensions
@@ -130,9 +158,10 @@ func InitializeGrid(grid):
 			grid.get_child(grid.CoordsToIndex(coords)).add_child(obstacle)
 		
 	grid.tilesContent = InitialGrid.duplicate(true)
+
 func ShowNextCard():
 	var player = int(CurrentPlayer==1) + 1#because ShowNextCard() is called after NextPlayer() in Tile.gd
-	match gamemode:
+	match gameMode:
 		Types.GameMode.MpLocalGame:
 			var deck
 			if player==1: 

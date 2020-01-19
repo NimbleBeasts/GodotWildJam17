@@ -7,7 +7,7 @@
 extends Control
 
 const levels = [
-	"res://src/Levels/Level0.tscn",
+	"res://src/Levels/LevelSp.tscn",
 	"res://src/Levels/LevelMp.tscn"
 ]
 
@@ -77,7 +77,7 @@ func newGame(gameMode, payLoad = null):
 			print("Error: Unhandled game mode requested")
 
 	#Hand over payload
-	levelNode.setup(payLoad) 
+	levelNode.setup(gameMode, payLoad) 
 	stateTransition(Types.GameStates.Game)
 
 func setLights(state):
