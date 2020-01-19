@@ -8,6 +8,14 @@ var Connections = []#contains coords for starting city tile and the destination 
 var Paths = {}# {start_pos:path}
 var score = 0
 var Anim = []#array used for displaying tile bonus one by one
+
+#vars used for score analysis:
+var SA_CitiesFactories = 0
+var SA_Rails = 0
+var SA_Stations = 0
+var SA_PenaltyBonus = 0
+
+
 func IsTileEmpty(tile):
 	return tilesContent[tile]==null
 
@@ -157,6 +165,7 @@ func getSpecialTilesBonus():
 				tile_bonus += int(nearbytile==Types.Tile.Buildings)*Types.ScoreCoef["PowerPlantCityBonus"]+int(nearbytile==Types.Tile.Factory)*Types.ScoreCoef["PowerPlantFactoryBonus"]
 			if !requirement_fullfilled: tile_bonus=Types.ScoreCoef["LonelyPowerPlant"]
 		bonus += tile_bonus
+		
 		Anim.append([tile[1],tile_bonus])
 	
 	for station in DisconnectedStations:
@@ -168,6 +177,7 @@ func CalculateScore():
 	var score = 0
 	ClearUselessValues()
 	var bonus = getSpecialTilesBonus()
+	SA_PenaltyBonus += bonus
 	for path_data in Paths.keys():
 		var path_score = 0
 		var station_bonus_active = false
@@ -177,7 +187,9 @@ func CalculateScore():
 			Anim.append([tile[1],value])
 			path_score+=value
 			if !station_bonus_active and (tile[0] in [Types.Tile.Station_UD, Types.Tile.Station_LR]):station_bonus_active = true
-		if station_bonus_active: path_score *=2
+		if station_bonus_active:
+			path_score *=2
+			SA_PenaltyBonus +=path_score
 		score+=path_score
 		
 		Anim.append(["PAUSE",1])
@@ -197,16 +209,20 @@ func getTileWorth(tile,path):
 				TileWorth = Types.ScoreCoef["ConnectionToCities"]
 			elif tile==path[0] and path[-1][0]==Types.Tile.Factory:
 				TileWorth = Types.ScoreCoef["ConnectionToFactories"]
+			SA_CitiesFactories += TileWorth
 		Types.Tile.Factory:
 			if tile==path[0] and path[-1][0]==Types.Tile.Factory:
 				TileWorth = Types.ScoreCoef["ConnectionToCities"]
 			elif tile==path[0] and path[-1][0]==Types.Tile.Buildings:
 				TileWorth = Types.ScoreCoef["ConnectionToFactories"]
+			SA_CitiesFactories += TileWorth
 		_:
 			if IsAPath(type):
 				if 'Station' in Types.TileStr[type]:
 					TileWorth = Types.ScoreCoef["Station"]
+					SA_Stations += TileWorth
 				else:
 					TileWorth = Types.ScoreCoef["Rail"]
+					SA_Rails += TileWorth
 	#print("getTileWorth(",tile,",",path,")=",TileWorth)
 	return TileWorth

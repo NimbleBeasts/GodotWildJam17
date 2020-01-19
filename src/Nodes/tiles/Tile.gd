@@ -14,7 +14,7 @@ func _on_Tile_pressed():
 		var gamemode = Global.gm.levelNode.LevelManager.gameMode
 		var LevelManager = Global.gm.levelNode.LevelManager
 		var current_player = LevelManager.CurrentPlayer
-		
+		LevelManager.get_node("SFX").play()
 		match gamemode:
 			Types.GameMode.MpLocalGame:
 				tile_type = LevelManager.get('TopCard'+str(current_player))

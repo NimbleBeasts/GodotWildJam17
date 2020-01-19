@@ -198,16 +198,44 @@ func ShowNextCard():
 			DeckNode1.get_node('TopCard').frame = Deck1[0]-3
 
 func GameOver():
+	var scores1 
+	var scores2 
 	match gameMode:
 		Types.GameMode.MpLocalGame:
 			TilesGrid1.CheckForConnections()
 			TilesGrid2.CheckForConnections()
 			Global.gm.levelNode.ShowCurrentPlayerUI(1)
-			var done = ScoreAnimator.Animate(TilesGrid1)
+			var done1 = ScoreAnimator.Animate(TilesGrid1)
+			scores1 = ScoreAnimator.result[0].duplicate(true)
 			Global.gm.levelNode.get_node('TopBar').updateGui(64,2)
 			Global.gm.levelNode.ShowCurrentPlayerUI(2)
 			yield(get_tree().create_timer(3), "timeout")
 			
-			ScoreAnimator.Animate(TilesGrid2)
+			var done2 = ScoreAnimator.Animate(TilesGrid2)
+			scores2 = ScoreAnimator.result[1].duplicate(true)
+			yield(get_tree().create_timer(2), "timeout")
 		_: #for SP
-			pass
+			TilesGrid1.CheckForConnections()
+			var done = ScoreAnimator.Animate(TilesGrid1)
+			scores1 = ScoreAnimator.result[0].duplicate(true)
+			yield(get_tree().create_timer(2), "timeout")
+	Global.gm.levelNode.get_node("ScoreBoard").setup(gameMode)
+	Global.gm.levelNode.get_node("ScoreBoard").updateGui(scores1,scores2)
+	Global.gm.levelNode.get_node("ScoreBoard").visible = true
+func GimmeSecondChance():
+	
+	if CurrentPlayer==2:
+		Deck2.remove(0)
+		var new_card_index = randi()%Deck2.size()
+		var new_card = Deck2[new_card_index]
+		TopCard2 = new_card
+		Deck2.erase(new_card)
+		DeckNode2.get_node('TopCard').frame = TopCard2-3
+
+	else:
+		Deck1.remove(0)
+		var new_card_index = randi()%Deck1.size()
+		var new_card = Deck1[new_card_index]
+		TopCard1 = new_card
+		Deck1.erase(new_card)
+		DeckNode1.get_node('TopCard').frame = TopCard1-3

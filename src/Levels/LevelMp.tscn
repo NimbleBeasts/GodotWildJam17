@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Levels/LevelMp.gd" type="Script" id=1]
 [ext_resource path="res://src/Nodes/LevelManager.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/art/tableTopMp.png" type="Texture" id=3]
 [ext_resource path="res://src/Nodes/TilesGrid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Nodes/Deck.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Nodes/TopBar.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/Nodes/ScoreAnimator.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Nodes/SecondChanceButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Nodes/ScoreBoard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Nodes/TopBar.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Nodes/ScoreAnimator.tscn" type="PackedScene" id=9]
 
 [node name="LevelMp" type="Node2D"]
 script = ExtResource( 1 )
@@ -33,6 +35,12 @@ margin_top = 160.0
 margin_right = 350.0
 margin_bottom = 160.0
 
+[node name="SecondChanceButton" parent="Player1" instance=ExtResource( 6 )]
+margin_left = 350.0
+margin_top = 272.0
+margin_right = 414.0
+margin_bottom = 336.0
+
 [node name="Player2" type="Node2D" parent="."]
 
 [node name="TilesGrid" parent="Player2" instance=ExtResource( 4 )]
@@ -49,24 +57,24 @@ margin_top = 160.0
 margin_right = 350.0
 margin_bottom = 160.0
 
-[node name="Button" type="Button" parent="."]
-margin_left = 192.0
-margin_top = 320.0
-margin_right = 269.0
-margin_bottom = 340.0
-text = "End Game"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="SecondChanceButton" parent="Player2" instance=ExtResource( 6 )]
+margin_left = 350.0
+margin_top = 272.0
+margin_right = 414.0
+margin_bottom = 336.0
 
 [node name="SuperAntiCheatLayer" type="ColorRect" parent="."]
 visible = false
 rect_min_size = Vector2( 1000, 1000 )
 color = Color( 1, 1, 1, 0 )
 
-[node name="TopBar" parent="." instance=ExtResource( 6 )]
+[node name="ScoreBoard" parent="." instance=ExtResource( 7 )]
+visible = false
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="TopBar" parent="." instance=ExtResource( 8 )]
 margin_right = 640.0
 
-[node name="ScoreAnimator" parent="." instance=ExtResource( 7 )]
+[node name="ScoreAnimator" parent="." instance=ExtResource( 9 )]
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

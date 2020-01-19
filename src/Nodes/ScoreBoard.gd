@@ -20,8 +20,8 @@ func updateGui(p1, p2 = {"rails": 0, "cities": 0, "stations": 0, "penalty": 0}):
 
 func _buildString(data):
 	var string = "[center]Rails: " + "%+d" % data.rails + "\n\n" + \
-		"Cities: " + "%+d" % data.cities + "\n\n" + \
+		"Cities/Factories: " + "%+d" % data.cities + "\n\n" + \
 		"Stations: " + "%+d" % data.stations + "\n\n" + \
-		"Penalty: " + "%+d" % data.penalty + "\n\n" + \
+		"Penalty/Bonus: " + "%+d" % data.penalty + "\n\n" + \
 		"Total: " + "%+d" % (data.cities + data.stations + data.penalty)
 	return string

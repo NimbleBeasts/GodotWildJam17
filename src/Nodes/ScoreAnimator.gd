@@ -1,5 +1,5 @@
 extends Node2D
-
+var result = []
 func Animate(grid):
 	var bonusLabel_scene = load('res://src/Nodes/ScoreAnimLabel.tscn')
 	var tiles = grid.Anim
@@ -10,7 +10,7 @@ func Animate(grid):
 			var bonusLabel = bonusLabel_scene.instance()
 			var txtColor = Color.green if (tile[1]>0) else Color.red
 			bonusLabel.set("custom_colors/font_color", txtColor)
-			bonusLabel.text = '+' + str(tile[1]) if tile[1]>=0 else '-' + str(tile[1])
+			bonusLabel.text = '+' + str(tile[1]) if tile[1]>=0 else  str(tile[1])
 			bonusLabel.rect_global_position = grid.get_child(grid.CoordsToIndex(tile[0])).rect_global_position
 			
 			add_child(bonusLabel)
@@ -20,4 +20,5 @@ func Animate(grid):
 			
 			bonusLabel.get_child(0).start()
 			yield(get_tree().create_timer(1), "timeout")
-	return true
+	result.append({"rails": grid.SA_Rails, "cities": grid.SA_CitiesFactories, "stations": grid.SA_Stations, "penalty": grid.SA_PenaltyBonus})
+	yield(get_tree().create_timer(0.5), "timeout")
