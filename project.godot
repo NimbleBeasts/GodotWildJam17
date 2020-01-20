@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GodotWildJam17"
+config/name="Rail&Write"
 run/main_scene="res://src/GameManager.tscn"
 boot_splash/image="res://assets/art/menu/nbSplash.png"
 config/icon="res://icon.png"
