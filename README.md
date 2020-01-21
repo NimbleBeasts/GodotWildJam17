@@ -10,8 +10,8 @@ Make sure you don't miss one of our games and follow us on [Itch.io](https://nim
 
 ![Rail&Write](https://img.itch.zone/aW1hZ2UvNTUwODIyLzI4OTE0NDEucG5n/347x500/yR1Gr7.png)
 
-## Contributions
-If you want to contribute, please join the [Discord Server](https://discord.gg/PW7EWVq)
-
 ## How to Play
 Read our [How-To](https://github.com/NimbleBeasts/GodotWildJam17/wiki) Guide.
+
+## Contributions
+If you want to contribute, please join the [Discord Server](https://discord.gg/PW7EWVq)
