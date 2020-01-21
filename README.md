@@ -1,30 +1,17 @@
-# NbKickstarter
-Kickstart Project
+![Rail&Write](https://img.itch.zone/aW1nLzI4ODAxODAucG5n/original/hQ60nt.png)
 
+## Rail&Write
+Build your own railway empire! Connect cities and factories to get more points. Parks, train stations and power plants give bonus points in combination with cities and factories.
+Play our interpretation of "Second Chance" with our Roll & Write puzzle game for the Godot Wild Jam #17.
 
-## About
-This is a simple kickstarter project for NimbleBeasts projects. It comes with some standard features and little helpers as well as a some stuff, no one has time for in a game jam.
+## Godot Wild Jam #17
+Made by the NimbleBeasts Collective Community for the Godot Wild Jam #17.
+Make sure you don't miss one of our games and follow us on [Itch.io](https://nimblebeasts.itch.io/), [GameJolt](https://gamejolt.com/@NimbleBeasts), [Twitter](https://twitter.com/nimblebeasts) or join our [Discord Server](https://discord.gg/PW7EWVq).
 
-## Structure
+![Rail&Write](https://img.itch.zone/aW1hZ2UvNTUwODIyLzI4OTE0NDEucG5n/347x500/yR1Gr7.png)
 
-- assets -> All the resources needed
-  - art -> All the art stuff
-  - fonts -> Fonts
-  - sounds -> Obviously sounds :D
+## Contributions
+If you want to contribute, please join the [Discord Server](https://discord.gg/PW7EWVq)
 
-- src -> Scenes and Sources
-  - autoloads -> Singletons: types -> global -> debug
-  - Levels -> (Can be removed if static level)
-  - Menu -> Menu Scene and Code
-
-## Game Manager
-The idea is to get rid of most get_parent() cascade and introduce a game manager which holds most of the stuff. The game manager is accessible by the global singleton, e.g:
-Global.gm.loadLevel(0)
-or
-Global.getGameManager().loadLevel(0)
-
-## Starting Point
-By default src/Levels/Level0.tscn is added to the gameViewport and serves as a first starting point.
-Tipp: Hide the BootSplash node in the GameManager scene for faster loading :)
-
-
+## How to Play
+Read our [How-To](https://github.com/NimbleBeasts/GodotWildJam17/wiki) Guide.
