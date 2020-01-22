@@ -33,6 +33,9 @@ func updateGui():
 		$Main/ButtonContinue.show()
 	else:
 		$Main/ButtonContinue.hide()
+		
+	#Generate new seed
+	$SinglePlayer/Custom/TeSeed.text = str(generateSeed())
 
 func dailySeed():
 	var date = OS.get_date()

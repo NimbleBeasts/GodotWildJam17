@@ -23,5 +23,5 @@ func _buildString(data):
 		"Cities/Factories: " + "%+d" % data.cities + "\n\n" + \
 		"Stations: " + "%+d" % data.stations + "\n\n" + \
 		"Penalty/Bonus: " + "%+d" % data.penalty + "\n\n" + \
-		"Total: " + "%+d" % (data.cities + data.stations + data.penalty)
+		"Total: " + "%+d" % (data.cities + data.rails + data.stations + data.penalty)
 	return string

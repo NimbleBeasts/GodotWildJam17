@@ -92,6 +92,7 @@ func InitializeComponents(mode, payLoad):
 			CitiesCount = payLoad.cities
 			TilesGrid2= Global.gm.levelNode.get_node("Player2/TilesGrid")
 			Deck2 = Deck1.duplicate(true)
+			Deck2.shuffle()
 			TopCard2 = Deck2[0]
 			DeckNode2 = Global.gm.levelNode.get_node('Player2/Deck')
 			DeckNode2.get_node('TopCard').frame = TopCard2-3
@@ -227,6 +228,7 @@ func GameOver():
 			TilesGrid1.CheckForConnections()
 			ScoreAnimator.Animate(TilesGrid1, true)
 			scores1 = getScore(TilesGrid1)
+			Global.gm.levelNode.get_node('TopBar').updateGui(0) #Quickfix to update turn
 	Global.gm.levelNode.get_node("ScoreBoard").setup(gameMode)
 	Global.gm.levelNode.get_node("ScoreBoard").updateGui(scores1,scores2)
 	

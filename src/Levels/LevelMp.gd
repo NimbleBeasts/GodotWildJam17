@@ -38,12 +38,13 @@ func FillTileMap(player):
 	if player == 2:
 		displayPlayer = 1
 	
-	$TileMap.clear()
+	$TmPreview.clear()
 	var data = get_node('Player'+str(displayPlayer)+'/TilesGrid').tilesContent
 #	print("============================")
 #	print("Player " + str(displayPlayer))
 #	print(data)
 	for i in range(8):
 		for j in range(8):
-			if data[[i,j]]:
-				$TileMap.set_cell(i, j, data[[i,j]])
+			if data[[i,j]] != null:
+				$TmPreview.set_cell(i, j, data[[i,j]])
+				

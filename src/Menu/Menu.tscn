@@ -229,7 +229,6 @@ __meta__ = {
 }
 
 [node name="SinglePlayer" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -514,6 +513,7 @@ margin_right = -16.0
 margin_bottom = -4.0
 mouse_filter = 1
 custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 0.388235, 0.368627, 0.403922, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Play Tutorial[/center]"
 text = "Play Tutorial"
@@ -624,6 +624,7 @@ margin_right = -16.0
 margin_bottom = -4.0
 mouse_filter = 1
 custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 0.388235, 0.368627, 0.403922, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Join Game[/center]"
 text = "Join Game"
@@ -803,6 +804,7 @@ margin_right = -16.0
 margin_bottom = -4.0
 mouse_filter = 1
 custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 0.388235, 0.368627, 0.403922, 1 )
 bbcode_enabled = true
 bbcode_text = "[center]Host Game[/center]"
 text = "Host Game"
@@ -947,6 +949,7 @@ __meta__ = {
 }
 
 [node name="Credits" type="Control" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {

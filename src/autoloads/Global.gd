@@ -16,7 +16,7 @@ extends Node
 # Version
 const version = {
 	"major": 0,
-	"minor": 1
+	"minor": 2
 }
 
 # Nb Plugin Config

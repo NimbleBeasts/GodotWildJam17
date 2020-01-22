@@ -18,5 +18,4 @@ script = ExtResource( 5 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-
 [connection signal="pressed" from="." to="." method="_on_SecondChanceButton_pressed"]

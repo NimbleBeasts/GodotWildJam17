@@ -249,7 +249,7 @@ margin_right = 640.0
 
 [node name="ScoreAnimator" parent="." instance=ExtResource( 9 )]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TmPreview" type="TileMap" parent="."]
 position = Vector2( 464, 48 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )

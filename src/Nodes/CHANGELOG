@@ -1,0 +1,10 @@
+0.2:
+- Fixed: Local MP cities not displayed on preview map
+- Fixed: Single player UI not updated on last turn
+- Fixed: Level settings did not apply for local MP
+- Fixed: Scoreboard total score not correct
+- Improved: Local MP shuffle player2 deck so its not the identical order to make it more fun
+- Improved: Beautify level background
+- Improved: New random seed for custom game each time the menu is updated
+- Improved: Score Animation labels are now outlined
+- Improved: Font color for disabled buttons
