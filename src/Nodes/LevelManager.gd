@@ -88,6 +88,8 @@ func InitializeComponents(mode, payLoad):
 			ObstaclesCount = payLoad.obstacles
 			CitiesCount = payLoad.cities
 		Types.GameMode.MpLocalGame:
+			ObstaclesCount = payLoad.obstacles
+			CitiesCount = payLoad.cities
 			TilesGrid2= Global.gm.levelNode.get_node("Player2/TilesGrid")
 			Deck2 = Deck1.duplicate(true)
 			TopCard2 = Deck2[0]
